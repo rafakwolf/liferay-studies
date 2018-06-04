@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="guestbook.model.Entry">
+		<field name="entryId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="name" type="String" />
+		<field name="message" type="String" />
+		<field name="guestbookId" type="long" />
+	</model>
+	<model name="guestbook.model.Guestbook">
+		<field name="guestbookId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="name" type="String" />
+	</model>
+</model-hints>
