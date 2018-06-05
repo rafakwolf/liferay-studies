@@ -5,7 +5,9 @@ import templates from './View.soy';
 /**
  * View Component
  */
-class View extends Component {}
+class View extends Component {
+
+}
 
 // Register component
 Soy.register(View, templates);

@@ -1,12 +1,12 @@
 import Component from 'metal-component/src/Component';
 import Soy from 'metal-soy/src/Soy';
 import {Config} from 'metal-state';
-import templates from './New.soy';
+import templates from './Edit.soy';
 
 /**
- * New Entry Component
+ * Edit Entry Component
  */
-class New extends Component {
+class Edit extends Component {
 
     toFormData(data) {
         const formData = new FormData();
@@ -46,36 +46,39 @@ class New extends Component {
         });
     }
 
-    addEntry() {
-        const prefixedData = Liferay.Util.ns(this.portletNamespace, {name:this.name, message:this.message});
+    updateEntry() {
+        const prefixedData = Liferay.Util.ns(this.portletNamespace, this.entry);
 
         this.requestMVCResource(this.siteURL, prefixedData)
-        .then(resp => {
-          alert("Entry is stored!");
-          document.getElementById("backtoview").click();
-        }).catch(e => {
-          console.log(e);
-          alert('Ops, something is wrong :(' + e.message);
+            .then(resp => {
+                alert("Entry is updated!");
+                document.getElementById("backtoview").click();
+            }).catch(e => {
+            console.log(e);
+            alert('Ops, something is wrong :(' + e.message);
         });
     }
 
     changeName(event) {
-        this.name = event.target.value;
+        this.entry.name = event.target.value;
     }
 
     changeMessage(event) {
-        this.message = event.target.value;
+        this.entry.message = event.target.value;
     }
 }
 
-New.STATE = {
-    name: Config.string(),
-    message: Config.string(),
+Edit.STATE = {
+    entry: Config.shapeOf({
+        entryId: Config.string(),
+        name: Config.string(),
+        message: Config.string()
+    }),
     siteURL: Config.string(),
     portletNamespace: Config.string()
 };
 
 // Register component
-Soy.register(New, templates);
+Soy.register(Edit, templates);
 
-export default New;
+export default Edit;

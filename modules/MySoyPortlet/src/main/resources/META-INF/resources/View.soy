@@ -4,50 +4,51 @@
  * Prints the portlet main view.
  */
 {template .render}
-  {@param id: string}
-  {@param entries: list<[
-  entryId: string,
-  name: string,
-  message: string
-  ]>}
-  {@param editUrl: any}
-  {@param newUrl: string}
+    {@param id: string}
+    {@param entries: list<[
+    entryId: string,
+    name: string,
+    message: string
+    ]>}
+    {@param editUrl: any}
+    {@param newUrl: string}
+    {@param portletNamespace: string}
 
-  <div id="{$id}">
-    {call Header.render data="all"}{/call}
+    <div id="{$id}">
+        {call Header.render data="all"}{/call}
 
-    {let $actions kind="html"}
-      <a class="btn btn-default" href="{$editUrl}" style="margin-right: 5px;">
-        <i class="icon-pencil"></i> Edit</a>
-      <button type="button" class="btn btn-default">
-        <i class="icon-trash"></i> Delete</button>
-    {/let}
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Message</th>
+                <th class="table-actions">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+                {foreach $entry in $entries}
+                    <tr>
+                        <td>{$entry.name}</td>
+                        <td>{$entry.message}</td>
+                        <td>
+                            <div>
+                                <a class="btn btn-default" href="{$editUrl}&{$portletNamespace}entryId={$entry.entryId}" style="margin-right: 5px;">
+                                    <i class="icon-pencil"></i> Edit</a>
 
-    <table class="table">
-      <thead>
-      <tr>
-        <th>Name</th>
-        <th>Message</th>
-        <th class="table-actions">Actions</th>
-      </tr>
-      </thead>
-      <tbody>
-        {foreach $entry in $entries}
-        <tr>
-          <td>{$entry.name}</td>
-          <td>{$entry.message}</td>
-          <td>
-            {$actions}
-          </td>
-        </tr>
-        {/foreach}
-      </tbody>
-    </table>
+                                <button type="button" class="btn btn-default">
+                                    <i class="icon-trash"></i> Delete
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                {/foreach}
+            </tbody>
+        </table>
 
-    <div>
-      <a class="btn btn-default" href="{$newUrl}">Add Entry</a>
+        <div>
+            <a class="btn btn-default" href="{$newUrl}">Add Entry</a>
+        </div>
+
+        {call Footer.render data="all"}{/call}
     </div>
-
-    {call Footer.render data="all"}{/call}
-  </div>
 {/template}
