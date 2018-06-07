@@ -1,20 +1,20 @@
 import Component from 'metal-component/src/Component';
 import Soy from 'metal-soy/src/Soy';
 import templates from './View.soy';
+import { requestMVCResource } from './commons';
 
-/**
- * View Component
- */
 class View extends Component {
 
+	deleteGuestbook(event) {
 
-    deleteEntry() {
+	    console.log(event);
+
         YUI().use(
             'aui-modal',
             function(Y) {
                 var modal = new Y.Modal(
                     {
-                        bodyContent: 'Deleting entry...',
+                        bodyContent: 'Deleting guestbook...',
                         centered: true,
                         headerContent: 'Are you sure?',
                         render: '#modal',
@@ -36,7 +36,19 @@ class View extends Component {
                             label: 'Delete',
                             on: {
                                 click: function() {
-                                    alert('Just an example, there will be no printing here.');
+
+                                    const prefixedData = Liferay.Util.ns(this.portletNamespace, this.guestbook);
+
+                                    requestMVCResource(this.siteURL, prefixedData)
+                                        .then(resp => {
+                                            alert("Guestbook updated!");
+                                            document.getElementById("backtoview").click();
+                                        }).catch(e => {
+                                        console.log(e);
+                                        alert('Ops, something is wrong :(' + e.message);
+                                    });
+
+
                                     modal.hide();
                                 }
                             }
@@ -46,7 +58,7 @@ class View extends Component {
 
             }
         );
-    }
+	}
 
 }
 

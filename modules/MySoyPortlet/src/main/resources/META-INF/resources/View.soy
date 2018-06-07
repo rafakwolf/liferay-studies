@@ -15,8 +15,6 @@
     {@param portletNamespace: string}
 
     <div id="{$id}">
-        {call Header.render data="all"}{/call}
-
         <table class="table">
             <thead>
             <tr>
@@ -33,10 +31,10 @@
                         <td>
                             <div>
                                 <a class="btn btn-default" href="{$editUrl}&{$portletNamespace}entryId={$entry.entryId}" style="margin-right: 5px;">
-                                    <i class="icon-pencil"></i> Edit</a>
+                                    <i class="icon-pencil"></i>{sp}Edit</a>
 
-                                <button type="button" class="btn btn-default">
-                                    <i class="icon-trash"></i> Delete
+                                <button type="button" class="btn btn-default" data-onclick="deleteEntry">
+                                    <i class="icon-trash"></i>{sp}Delete
                                 </button>
                             </div>
                         </td>
@@ -46,9 +44,7 @@
         </table>
 
         <div>
-            <a class="btn btn-default" href="{$newUrl}">Add Entry</a>
+            <a class="btn btn-default" href="{$newUrl}"><i class="icon-plus"></i>{sp}Add Entry</a>
         </div>
-
-        {call Footer.render data="all"}{/call}
     </div>
 {/template}

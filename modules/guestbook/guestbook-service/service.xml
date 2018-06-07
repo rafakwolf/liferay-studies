@@ -1,47 +1,48 @@
 <?xml version="1.0"?>
-<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.0.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_0_0.dtd">
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.0.0//EN"
+        "http://www.liferay.com/dtd/liferay-service-builder_7_0_0.dtd">
 
 <service-builder package-path="guestbook">
-	<namespace>guestbook</namespace>
+    <namespace>guestbook</namespace>
 
-  <entity name="Entry" local-service="true" remote-service="true" uuid="false">
+    <entity name="Entry" local-service="true" remote-service="true" uuid="false">
 
-    <column name="entryId" primary="true" type="long" />
+        <column name="entryId" primary="true" type="long"/>
 
-    <column name="groupId" type="long"/>
+        <column name="groupId" type="long"/>
 
-    <column name="name" type="String" />
-    <column name="message" type="String" />
+        <column name="name" type="String"/>
+        <column name="message" type="String"/>
 
-    <column name="guestbookId" type="long" />
+        <column name="guestbookId" type="long"/>
 
-    <finder name="nameFinder" return-type="Collection">
-      <finder-column name="name" />
-    </finder>
+        <finder name="nameFinder" return-type="Collection">
+            <finder-column name="name"/>
+        </finder>
 
-  </entity>
+    </entity>
 
-	<entity name="Guestbook" local-service="true" remote-service="true" uuid="false">
+    <entity name="Guestbook" local-service="true" remote-service="true" uuid="false">
 
-		<!-- PK fields -->
+        <!-- PK fields -->
 
-		<column name="guestbookId" primary="true" type="long" />
+        <column name="guestbookId" primary="true" type="long"/>
 
-    <column name="groupId" type="long"/>
+        <column name="groupId" type="long"/>
 
-		<column name="name" type="String" />
+        <column name="name" type="String"/>
 
-		<finder name="NameSearch" return-type="Collection">
-			<finder-column name="name" />
-		</finder>
+        <finder name="NameSearch" return-type="Collection">
+            <finder-column name="name"/>
+        </finder>
 
-	</entity>
+    </entity>
 
-	<exceptions>
-		<exception>EntryEmail</exception>
-		<exception>EntryMessage</exception>
-		<exception>EntryName</exception>
-		<exception>GuestbookName</exception>
-	</exceptions>
+    <exceptions>
+        <exception>EntryEmail</exception>
+        <exception>EntryMessage</exception>
+        <exception>EntryName</exception>
+        <exception>GuestbookName</exception>
+    </exceptions>
 
 </service-builder>

@@ -1,0 +1,52 @@
+{namespace View}
+
+/**
+ * Prints the portlet main view.
+ */
+{template .render}
+    {@param id: string}
+    {@param guestbooks: list<[
+    guestbookId: string,
+    name: string
+    ]>}
+    {@param editUrl: any}
+    {@param newUrl: string}
+    {@param portletNamespace: string}
+
+    <div id="{$id}">
+        <h1>Guestbooks</h1>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Ações</th>
+            </tr>
+            </thead>
+            <tbody>
+                {foreach $guestbook in $guestbooks}
+                <tr>
+                    <td>
+                        {$guestbook.name}
+                    </td>
+                    <td>
+                        <a href="{$editUrl}&{$portletNamespace}guestbookId={$guestbook.guestbookId}"
+                           class="btn btn-default" style="margin-right: 5px;">
+                            <i class="icon-pencil"></i>{sp}Edit
+                        </a>
+
+                        <button class="btn btn-default" data-onclick="deleteGuestbook">
+                            <i class="icon-trash"></i>{sp}Delete
+                        </button>
+                    </td>
+                </tr>
+                {/foreach}
+            </tbody>
+        </table>
+
+        <div>
+            <a class="btn btn-default" href="{$newUrl}">
+                <i class="icon-plus"></i>{sp}New Guestbook</a>
+        </div>
+    </div>
+{/template}
