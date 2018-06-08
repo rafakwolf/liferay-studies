@@ -4,9 +4,9 @@ import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import com.liferay.portal.kernel.template.Template;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.WebKeys;
+import commons.ResourceOperations;
 import guestbook.model.Entry;
 import guestbook.service.EntryLocalServiceUtil;
-import mysoyportlet.common.ResourceOperations;
 import mysoyportlet.constants.MySoyPortletPortletKeys;
 import org.osgi.service.component.annotations.Component;
 
@@ -39,7 +39,7 @@ public class MySoyPortletEditMVCRenderCommand
         backToView.setParameter("mvcRenderCommandName", "View");
         template.put("backToViewURL", backToView.toString());
 
-        ResourceURL resourceURL = new ResourceOperations().getPortletResourceURL(renderResponse,
+        ResourceURL resourceURL = ResourceOperations.getPortletResourceURL(renderResponse,
                 MySoyPortletPortletKeys.MVC_RESOURCE_COMMAND);
 
         template.put("siteURL", resourceURL.toString());

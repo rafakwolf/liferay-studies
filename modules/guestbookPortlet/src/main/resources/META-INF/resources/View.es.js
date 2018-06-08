@@ -1,17 +1,16 @@
 import Component from 'metal-component/src/Component';
 import Soy from 'metal-soy/src/Soy';
 import templates from './View.soy';
+import {Config} from 'metal-state';
 import { requestMVCResource } from './commons';
 
 class View extends Component {
 
 	deleteGuestbook(event) {
 
-	    console.log(event);
-
         YUI().use(
             'aui-modal',
-            function(Y) {
+            (Y) => {
                 var modal = new Y.Modal(
                     {
                         bodyContent: 'Deleting guestbook...',
@@ -27,7 +26,7 @@ class View extends Component {
                         {
                             label: 'Cancel',
                             on: {
-                                click: function() {
+                                click: () => {
                                     modal.hide();
                                 }
                             }
@@ -35,19 +34,20 @@ class View extends Component {
                         {
                             label: 'Delete',
                             on: {
-                                click: function() {
+                                click: () => {
 
-                                    const prefixedData = Liferay.Util.ns(this.portletNamespace, this.guestbook);
+                                    const guestbookId = $('#btnDeleteGuestbook').attr('guestbookid');
 
-                                    requestMVCResource(this.siteURL, prefixedData)
+                                    const prefixedData = Liferay.Util.ns(this.portletNamespace, {guestbookId});
+
+                                    requestMVCResource(this.siteURL+"&"+this.portletNamespace+"act=delete", prefixedData)
                                         .then(resp => {
-                                            alert("Guestbook updated!");
-                                            document.getElementById("backtoview").click();
+                                            alert("Guestbook deleted!");
+                                            Liferay.SPA.app.reloadPage();
                                         }).catch(e => {
                                         console.log(e);
                                         alert('Ops, something is wrong :(' + e.message);
                                     });
-
 
                                     modal.hide();
                                 }
@@ -61,6 +61,11 @@ class View extends Component {
 	}
 
 }
+
+View.STATE = {
+    siteURL: Config.string(),
+    portletNamespace: Config.string()
+};
 
 // Register component
 Soy.register(View, templates);

@@ -1,0 +1,6 @@
+.gradle/
+build/
+node_modules/
+target/
+*-lock.json
+*.soy.js

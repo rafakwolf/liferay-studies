@@ -1,7 +1,8 @@
 package mysoyportlet.portlet.action;
 
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCResourceCommand;
-import mysoyportlet.common.CrudOperations;
+import com.liferay.portal.kernel.util.GetterUtil;
+import commons.CrudOperations;
 import mysoyportlet.constants.MySoyPortletPortletKeys;
 import org.osgi.service.component.annotations.Component;
 
@@ -18,7 +19,16 @@ public class MySoyPortletNewOrEditMVCResourceCommand implements MVCResourceComma
 
     @Override
     public boolean serveResource(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws PortletException {
-        new CrudOperations().saveOrUpdate(resourceRequest, resourceResponse);
+
+        String action = GetterUtil.getString(resourceRequest.getParameter("act"));
+
+        if (action != null && !action.isEmpty()){
+            if (action.equals("delete")){
+                CrudOperations.removeEntry(resourceRequest, resourceResponse);
+            }
+        }
+
+        CrudOperations.saveOrUpdateEntry(resourceRequest, resourceResponse);
         return true;
     }
 }

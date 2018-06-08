@@ -1,5 +1,8 @@
 package guestbookportlet.portlet;
 
+import com.liferay.portal.kernel.cache.CacheRegistryUtil;
+import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
+import com.liferay.portal.kernel.webcache.WebCachePoolUtil;
 import guestbookportlet.constants.GuestbookPortletPortletKeys;
 
 import com.liferay.portal.kernel.util.ReleaseInfo;
@@ -35,4 +38,11 @@ import org.osgi.service.component.annotations.Reference;
 	service = Portlet.class
 )
 public class GuestbookPortletPortlet extends SoyPortlet {
+
+	public static void main(String[] args) {
+		CacheRegistryUtil.clear(); // - to clear all the Database caches
+		MultiVMPoolUtil.clear();   // - clearing cache across JVM clusters
+		WebCachePoolUtil.clear(); // - clearing cache in XsiNilLoader. Single VM
+	}
+
 }

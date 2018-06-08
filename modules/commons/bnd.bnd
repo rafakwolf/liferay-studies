@@ -1,0 +1,15 @@
+Bundle-Name: Commons
+Bundle-SymbolicName: commons
+Bundle-Version: 1.0.0
+Include-Resource: package.json
+Web-ContextPath: /commons
+Export-Package:\
+  commons
+Provide-Capability:\
+	soy;\
+		type="commons";\
+		version:Version="1.0.0"
+Require-Capability:\
+	soy;\
+		filter:="(type=commons)"
+-dsannotations-options: inherit

@@ -1,17 +1,13 @@
-function toFormData(data) {
+function requestMVCResource(url, data, method = 'POST') {
+
     const formData = new FormData();
     for (const [key, value] of Object.entries(data)) {
         formData.append(key, value);
     }
 
-    return formData;
-}
-
-function requestMVCResource(url, data, method = 'POST') {
-
     return new Promise((resolve, reject) => {
         fetch(url, {
-            body: this.toFormData(data),
+            body: formData,
             credentials: 'include',
             method: method
         })

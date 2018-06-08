@@ -2,20 +2,17 @@ package guestbookportlet.portlet.action;
 
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import com.liferay.portal.kernel.template.Template;
-import com.liferay.portal.kernel.theme.ThemeDisplay;
-import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.WebKeys;
-
-import javax.portlet.PortletURL;
-import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
-
+import commons.ResourceOperations;
 import guestbook.model.Guestbook;
-import guestbook.service.GuestbookLocalService;
 import guestbook.service.GuestbookLocalServiceUtil;
 import guestbookportlet.constants.GuestbookPortletPortletKeys;
 import org.osgi.service.component.annotations.Component;
 
+import javax.portlet.PortletURL;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
+import javax.portlet.ResourceURL;
 import java.util.List;
 
 /**
@@ -25,7 +22,8 @@ import java.util.List;
         immediate = true,
         property = {
                 "javax.portlet.name="+GuestbookPortletPortletKeys.GuestbookPortlet,
-                "mvc.command.name=View"
+                "mvc.command.name=View",
+                "mvc.command.name=/"
         },
         service = MVCRenderCommand.class
 )
@@ -51,6 +49,10 @@ public class GuestbookPortletViewMVCRenderCommand
         editUrl.setParameter("mvcRenderCommandName", "Edit");
         template.put("editUrl", editUrl.toString());
 
+        ResourceURL resourceURL = ResourceOperations.getPortletResourceURL(renderResponse,
+                GuestbookPortletPortletKeys.MVC_RESOURCE_COMMAND);
+
+        template.put("siteURL", resourceURL.toString());
         template.put("portletNamespace", renderResponse.getNamespace());
 
         int guestbookCount = GuestbookLocalServiceUtil.getGuestbooksCount();

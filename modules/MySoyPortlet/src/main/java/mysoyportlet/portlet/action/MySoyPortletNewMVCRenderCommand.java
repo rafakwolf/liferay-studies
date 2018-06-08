@@ -10,7 +10,7 @@ import javax.portlet.RenderResponse;
 
 import javax.portlet.ResourceURL;
 
-import mysoyportlet.common.ResourceOperations;
+import commons.ResourceOperations;
 import mysoyportlet.constants.MySoyPortletPortletKeys;
 import org.osgi.service.component.annotations.Component;
 
@@ -38,7 +38,7 @@ public class MySoyPortletNewMVCRenderCommand
         backToViewURL.setParameter("mvcRenderCommandName", "View");
         template.put("backToViewURL", backToViewURL.toString());
 
-        ResourceURL resourceURL = new ResourceOperations().getPortletResourceURL(renderResponse,
+        ResourceURL resourceURL = ResourceOperations.getPortletResourceURL(renderResponse,
                 MySoyPortletPortletKeys.MVC_RESOURCE_COMMAND);
 
         template.put("siteURL", resourceURL.toString());

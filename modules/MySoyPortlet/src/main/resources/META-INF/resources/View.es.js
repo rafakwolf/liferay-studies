@@ -1,6 +1,7 @@
 import Component from 'metal-component/src/Component';
 import Soy from 'metal-soy/src/Soy';
 import templates from './View.soy';
+import { requestMVCResource } from './commons';
 
 /**
  * View Component
@@ -11,7 +12,7 @@ class View extends Component {
     deleteEntry() {
         YUI().use(
             'aui-modal',
-            function(Y) {
+            (Y) => {
                 var modal = new Y.Modal(
                     {
                         bodyContent: 'Deleting entry...',
@@ -27,7 +28,7 @@ class View extends Component {
                         {
                             label: 'Cancel',
                             on: {
-                                click: function() {
+                                click: () => {
                                     modal.hide();
                                 }
                             }
@@ -35,8 +36,20 @@ class View extends Component {
                         {
                             label: 'Delete',
                             on: {
-                                click: function() {
-                                    alert('Just an example, there will be no printing here.');
+                                click: () => {
+                                    const entryId = $('#btnDeleteEntry').attr('entryid');
+
+                                    const prefixedData = Liferay.Util.ns(this.portletNamespace, {entryId});
+
+                                    requestMVCResource(this.siteURL+"&"+this.portletNamespace+"act=delete", prefixedData)
+                                        .then(resp => {
+                                            alert("Entry deleted!");
+                                            Liferay.SPA.app.reloadPage();
+                                        }).catch(e => {
+                                        console.log(e);
+                                        alert('Ops, something is wrong :(' + e.message);
+                                    });
+
                                     modal.hide();
                                 }
                             }

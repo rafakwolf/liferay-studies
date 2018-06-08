@@ -1,12 +1,13 @@
 package mysoyportlet.portlet;
 
-import mysoyportlet.constants.MySoyPortletPortletKeys;
-
+import com.liferay.portal.kernel.cache.CacheRegistryUtil;
+import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
+import com.liferay.portal.kernel.webcache.WebCachePoolUtil;
 import com.liferay.portal.portlet.bridge.soy.SoyPortlet;
+import mysoyportlet.constants.MySoyPortletPortletKeys;
+import org.osgi.service.component.annotations.Component;
 
 import javax.portlet.Portlet;
-
-import org.osgi.service.component.annotations.Component;
 
 /**
  * @author rafael
@@ -27,4 +28,11 @@ import org.osgi.service.component.annotations.Component;
 	service = Portlet.class
 )
 public class MySoyPortletPortlet extends SoyPortlet {
+
+
+	public static void main(String[] args) {
+		CacheRegistryUtil.clear(); // - to clear all the Database caches
+		MultiVMPoolUtil.clear();   // - clearing cache across JVM clusters
+		WebCachePoolUtil.clear(); //- clearing cache in XsiNilLoader. Single VM
+	}
 }

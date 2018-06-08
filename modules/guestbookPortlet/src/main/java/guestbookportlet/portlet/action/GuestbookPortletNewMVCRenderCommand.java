@@ -3,6 +3,7 @@ package guestbookportlet.portlet.action;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import com.liferay.portal.kernel.template.Template;
 import com.liferay.portal.kernel.util.WebKeys;
+import commons.ResourceOperations;
 import guestbookportlet.constants.GuestbookPortletPortletKeys;
 import org.osgi.service.component.annotations.Component;
 
@@ -21,14 +22,6 @@ import javax.portlet.*;
 )
 public class GuestbookPortletNewMVCRenderCommand implements MVCRenderCommand {
 
-    private ResourceURL getPortletResourceURL(
-            RenderResponse renderResponse, String resourceID) {
-
-        ResourceURL resourceURL = renderResponse.createResourceURL();
-        resourceURL.setResourceID(resourceID);
-        return resourceURL;
-    }
-
     @Override
     public String render(RenderRequest renderRequest, RenderResponse renderResponse) throws PortletException {
         Template template = (Template) renderRequest.getAttribute(
@@ -38,7 +31,7 @@ public class GuestbookPortletNewMVCRenderCommand implements MVCRenderCommand {
         backToViewURL.setParameter("mvcRenderCommandName", "View");
         template.put("backToViewURL", backToViewURL.toString());
 
-        ResourceURL resourceURL = getPortletResourceURL(renderResponse,
+        ResourceURL resourceURL = ResourceOperations.getPortletResourceURL(renderResponse,
                 GuestbookPortletPortletKeys.MVC_RESOURCE_COMMAND);
 
         template.put("siteURL", resourceURL.toString());
