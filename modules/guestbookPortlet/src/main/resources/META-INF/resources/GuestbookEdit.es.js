@@ -1,8 +1,8 @@
 import Component from 'metal-component/src/Component';
 import Soy from 'metal-soy/src/Soy';
 import {Config} from 'metal-state';
-import templates from './Edit.soy';
-import { requestMVCResource } from './commons';
+import templates from './GuestbookEdit.soy';
+import { requestMVCResource } from 'commons/commons.es';
 
 /**
  * Edit Guestbook Component

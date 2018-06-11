@@ -21,7 +21,8 @@ import javax.portlet.ResourceURL;
 @Component(
         immediate = true,
         property = {
-                "javax.portlet.name=MySoyPortlet", "mvc.command.name=Edit"
+                "javax.portlet.name=MySoyPortlet",
+                "mvc.command.name=EntryEdit"
         },
         service = MVCRenderCommand.class
 )
@@ -36,7 +37,7 @@ public class MySoyPortletEditMVCRenderCommand
                 WebKeys.TEMPLATE);
 
         PortletURL backToView = renderResponse.createRenderURL();
-        backToView.setParameter("mvcRenderCommandName", "View");
+        backToView.setParameter("mvcRenderCommandName", "EntryView");
         template.put("backToViewURL", backToView.toString());
 
         ResourceURL resourceURL = ResourceOperations.getPortletResourceURL(renderResponse,
@@ -51,7 +52,7 @@ public class MySoyPortletEditMVCRenderCommand
 
         template.put("entry", entry);
 
-        return "Edit";
+        return "EntryEdit";
     }
 
 }

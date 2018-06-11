@@ -1,19 +1,20 @@
 import Component from 'metal-component/src/Component';
 import Soy from 'metal-soy/src/Soy';
-import templates from './View.soy';
-import {Config} from 'metal-state';
-import { requestMVCResource } from './commons';
+import templates from './EntryView.soy';
+import { requestMVCResource } from 'commons/commons.es';
 
+/**
+ * View Component
+ */
 class View extends Component {
 
-	deleteGuestbook(event) {
-
+    deleteEntry() {
         YUI().use(
             'aui-modal',
             (Y) => {
                 var modal = new Y.Modal(
                     {
-                        bodyContent: 'Deleting guestbook...',
+                        bodyContent: 'Deleting entry...',
                         centered: true,
                         headerContent: 'Are you sure?',
                         render: '#modal',
@@ -35,14 +36,13 @@ class View extends Component {
                             label: 'Delete',
                             on: {
                                 click: () => {
+                                    const entryId = $('#btnDeleteEntry').attr('entryid');
 
-                                    const guestbookId = $('#btnDeleteGuestbook').attr('guestbookid');
-
-                                    const prefixedData = Liferay.Util.ns(this.portletNamespace, {guestbookId});
+                                    const prefixedData = Liferay.Util.ns(this.portletNamespace, {entryId});
 
                                     requestMVCResource(this.siteURL+"&"+this.portletNamespace+"act=delete", prefixedData)
                                         .then(resp => {
-                                            alert("Guestbook deleted!");
+                                            alert("Entry deleted!");
                                             Liferay.SPA.app.reloadPage();
                                         }).catch(e => {
                                         console.log(e);
@@ -58,14 +58,9 @@ class View extends Component {
 
             }
         );
-	}
+    }
 
 }
-
-View.STATE = {
-    siteURL: Config.string(),
-    portletNamespace: Config.string()
-};
 
 // Register component
 Soy.register(View, templates);

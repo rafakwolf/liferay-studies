@@ -30,10 +30,11 @@ import org.osgi.service.component.annotations.Reference;
 		"com.liferay.portlet.single-page-application=false",
 		"javax.portlet.display-name=guestbookPortlet Portlet",
 		"javax.portlet.init-param.template-path=/",
-		"javax.portlet.init-param.view-template=View",
+		"javax.portlet.init-param.view-template=GuestbookView",
 		"javax.portlet.name=" + GuestbookPortletPortletKeys.GuestbookPortlet,
 		"javax.portlet.resource-bundle=content.Language",
-		"javax.portlet.security-role-ref=power-user,user"
+		"javax.portlet.security-role-ref=power-user,user",
+		"javax.portlet.expiration-cache=0"
 	},
 	service = Portlet.class
 )

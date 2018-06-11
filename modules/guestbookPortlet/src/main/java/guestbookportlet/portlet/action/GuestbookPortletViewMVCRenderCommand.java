@@ -22,7 +22,7 @@ import java.util.List;
         immediate = true,
         property = {
                 "javax.portlet.name="+GuestbookPortletPortletKeys.GuestbookPortlet,
-                "mvc.command.name=View",
+                "mvc.command.name=GuestbookView",
                 "mvc.command.name=/"
         },
         service = MVCRenderCommand.class
@@ -38,15 +38,15 @@ public class GuestbookPortletViewMVCRenderCommand
                 WebKeys.TEMPLATE);
 
         PortletURL navigationURL = renderResponse.createRenderURL();
-        navigationURL.setParameter("mvcRenderCommandName", "View");
+        navigationURL.setParameter("mvcRenderCommandName", "GuestbookView");
         template.put("backToViewURL", navigationURL.toString());
 
         PortletURL newUrl = renderResponse.createRenderURL();
-        newUrl.setParameter("mvcRenderCommandName", "New");
+        newUrl.setParameter("mvcRenderCommandName", "GuestbookNew");
         template.put("newUrl", newUrl.toString());
 
         PortletURL editUrl = renderResponse.createRenderURL();
-        editUrl.setParameter("mvcRenderCommandName", "Edit");
+        editUrl.setParameter("mvcRenderCommandName", "GuestbookEdit");
         template.put("editUrl", editUrl.toString());
 
         ResourceURL resourceURL = ResourceOperations.getPortletResourceURL(renderResponse,
@@ -59,7 +59,7 @@ public class GuestbookPortletViewMVCRenderCommand
         List<Guestbook> guestbooks = GuestbookLocalServiceUtil.getGuestbooks(0, guestbookCount);
         template.put("guestbooks", guestbooks);
 
-        return "View";
+        return "GuestbookView";
     }
 
 }

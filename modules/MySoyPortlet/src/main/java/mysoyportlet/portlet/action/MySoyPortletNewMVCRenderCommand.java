@@ -20,7 +20,8 @@ import org.osgi.service.component.annotations.Component;
 @Component(
         immediate = true,
         property = {
-                "javax.portlet.name=MySoyPortlet", "mvc.command.name=New"
+                "javax.portlet.name=MySoyPortlet",
+                "mvc.command.name=EntryNew"
         },
         service = MVCRenderCommand.class
 )
@@ -35,7 +36,7 @@ public class MySoyPortletNewMVCRenderCommand
                 WebKeys.TEMPLATE);
 
         PortletURL backToViewURL = renderResponse.createRenderURL();
-        backToViewURL.setParameter("mvcRenderCommandName", "View");
+        backToViewURL.setParameter("mvcRenderCommandName", "EntryView");
         template.put("backToViewURL", backToViewURL.toString());
 
         ResourceURL resourceURL = ResourceOperations.getPortletResourceURL(renderResponse,
@@ -44,7 +45,7 @@ public class MySoyPortletNewMVCRenderCommand
         template.put("siteURL", resourceURL.toString());
         template.put("portletNamespace", renderResponse.getNamespace());
 
-        return "New";
+        return "EntryNew";
     }
 
 }

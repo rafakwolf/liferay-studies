@@ -16,7 +16,7 @@ import javax.portlet.*;
         immediate = true,
         property = {
                 "javax.portlet.name="+GuestbookPortletPortletKeys.GuestbookPortlet,
-                "mvc.command.name=New"
+                "mvc.command.name=GuestbookNew"
         },
         service = MVCRenderCommand.class
 )
@@ -28,7 +28,7 @@ public class GuestbookPortletNewMVCRenderCommand implements MVCRenderCommand {
                 WebKeys.TEMPLATE);
 
         PortletURL backToViewURL = renderResponse.createRenderURL();
-        backToViewURL.setParameter("mvcRenderCommandName", "View");
+        backToViewURL.setParameter("mvcRenderCommandName", "GuestbookView");
         template.put("backToViewURL", backToViewURL.toString());
 
         ResourceURL resourceURL = ResourceOperations.getPortletResourceURL(renderResponse,
@@ -37,7 +37,7 @@ public class GuestbookPortletNewMVCRenderCommand implements MVCRenderCommand {
         template.put("siteURL", resourceURL.toString());
         template.put("portletNamespace", renderResponse.getNamespace());
 
-        return "New";
+        return "GuestbookNew";
 
     }
 }
