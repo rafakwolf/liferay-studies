@@ -16,6 +16,13 @@
     {@param portletNamespace: string}
 
     <div id="{$id}">
+
+        <h1>Entries</h1>
+
+        <div>
+            <a class="btn btn-default" href="{$newUrl}"><i class="icon-plus"></i>{sp}New Entry</a>
+        </div>
+
         <table class="table">
             <thead>
             <tr>
@@ -47,9 +54,5 @@
                 {/foreach}
             </tbody>
         </table>
-
-        <div>
-            <a class="btn btn-default" href="{$newUrl}"><i class="icon-plus"></i>{sp}Add Entry</a>
-        </div>
     </div>
 {/template}
