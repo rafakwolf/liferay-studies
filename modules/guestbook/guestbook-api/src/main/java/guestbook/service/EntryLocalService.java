@@ -76,6 +76,7 @@ public interface EntryLocalService extends BaseLocalService,
 	* @param entryId the primary key for the new entry
 	* @return the new entry
 	*/
+	@Transactional(enabled = false)
 	public Entry createEntry(long entryId);
 
 	/**
@@ -209,7 +210,7 @@ public interface EntryLocalService extends BaseLocalService,
 	*
 	* @return the OSGi service identifier
 	*/
-	public java.lang.String getOSGiServiceIdentifier();
+	public String getOSGiServiceIdentifier();
 
 	@Override
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

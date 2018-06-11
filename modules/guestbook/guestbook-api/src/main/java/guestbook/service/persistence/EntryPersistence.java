@@ -48,7 +48,7 @@ public interface EntryPersistence extends BasePersistence<Entry> {
 	* @param name the name
 	* @return the matching entries
 	*/
-	public java.util.List<Entry> findBynameFinder(java.lang.String name);
+	public java.util.List<Entry> findBynameFinder(String name);
 
 	/**
 	* Returns a range of all the entries where name = &#63;.
@@ -62,8 +62,8 @@ public interface EntryPersistence extends BasePersistence<Entry> {
 	* @param end the upper bound of the range of entries (not inclusive)
 	* @return the range of matching entries
 	*/
-	public java.util.List<Entry> findBynameFinder(java.lang.String name,
-		int start, int end);
+	public java.util.List<Entry> findBynameFinder(String name, int start,
+		int end);
 
 	/**
 	* Returns an ordered range of all the entries where name = &#63;.
@@ -78,8 +78,8 @@ public interface EntryPersistence extends BasePersistence<Entry> {
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching entries
 	*/
-	public java.util.List<Entry> findBynameFinder(java.lang.String name,
-		int start, int end,
+	public java.util.List<Entry> findBynameFinder(String name, int start,
+		int end,
 		com.liferay.portal.kernel.util.OrderByComparator<Entry> orderByComparator);
 
 	/**
@@ -96,8 +96,8 @@ public interface EntryPersistence extends BasePersistence<Entry> {
 	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching entries
 	*/
-	public java.util.List<Entry> findBynameFinder(java.lang.String name,
-		int start, int end,
+	public java.util.List<Entry> findBynameFinder(String name, int start,
+		int end,
 		com.liferay.portal.kernel.util.OrderByComparator<Entry> orderByComparator,
 		boolean retrieveFromCache);
 
@@ -109,7 +109,7 @@ public interface EntryPersistence extends BasePersistence<Entry> {
 	* @return the first matching entry
 	* @throws NoSuchEntryException if a matching entry could not be found
 	*/
-	public Entry findBynameFinder_First(java.lang.String name,
+	public Entry findBynameFinder_First(String name,
 		com.liferay.portal.kernel.util.OrderByComparator<Entry> orderByComparator)
 		throws NoSuchEntryException;
 
@@ -120,7 +120,7 @@ public interface EntryPersistence extends BasePersistence<Entry> {
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching entry, or <code>null</code> if a matching entry could not be found
 	*/
-	public Entry fetchBynameFinder_First(java.lang.String name,
+	public Entry fetchBynameFinder_First(String name,
 		com.liferay.portal.kernel.util.OrderByComparator<Entry> orderByComparator);
 
 	/**
@@ -131,7 +131,7 @@ public interface EntryPersistence extends BasePersistence<Entry> {
 	* @return the last matching entry
 	* @throws NoSuchEntryException if a matching entry could not be found
 	*/
-	public Entry findBynameFinder_Last(java.lang.String name,
+	public Entry findBynameFinder_Last(String name,
 		com.liferay.portal.kernel.util.OrderByComparator<Entry> orderByComparator)
 		throws NoSuchEntryException;
 
@@ -142,7 +142,7 @@ public interface EntryPersistence extends BasePersistence<Entry> {
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching entry, or <code>null</code> if a matching entry could not be found
 	*/
-	public Entry fetchBynameFinder_Last(java.lang.String name,
+	public Entry fetchBynameFinder_Last(String name,
 		com.liferay.portal.kernel.util.OrderByComparator<Entry> orderByComparator);
 
 	/**
@@ -154,8 +154,7 @@ public interface EntryPersistence extends BasePersistence<Entry> {
 	* @return the previous, current, and next entry
 	* @throws NoSuchEntryException if a entry with the primary key could not be found
 	*/
-	public Entry[] findBynameFinder_PrevAndNext(long entryId,
-		java.lang.String name,
+	public Entry[] findBynameFinder_PrevAndNext(long entryId, String name,
 		com.liferay.portal.kernel.util.OrderByComparator<Entry> orderByComparator)
 		throws NoSuchEntryException;
 
@@ -164,7 +163,7 @@ public interface EntryPersistence extends BasePersistence<Entry> {
 	*
 	* @param name the name
 	*/
-	public void removeBynameFinder(java.lang.String name);
+	public void removeBynameFinder(String name);
 
 	/**
 	* Returns the number of entries where name = &#63;.
@@ -172,7 +171,7 @@ public interface EntryPersistence extends BasePersistence<Entry> {
 	* @param name the name
 	* @return the number of matching entries
 	*/
-	public int countBynameFinder(java.lang.String name);
+	public int countBynameFinder(String name);
 
 	/**
 	* Caches the entry in the entity cache if it is enabled.

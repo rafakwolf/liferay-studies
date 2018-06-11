@@ -48,7 +48,7 @@ public interface GuestbookPersistence extends BasePersistence<Guestbook> {
 	* @param name the name
 	* @return the matching guestbooks
 	*/
-	public java.util.List<Guestbook> findByNameSearch(java.lang.String name);
+	public java.util.List<Guestbook> findByNameSearch(String name);
 
 	/**
 	* Returns a range of all the guestbooks where name = &#63;.
@@ -62,8 +62,8 @@ public interface GuestbookPersistence extends BasePersistence<Guestbook> {
 	* @param end the upper bound of the range of guestbooks (not inclusive)
 	* @return the range of matching guestbooks
 	*/
-	public java.util.List<Guestbook> findByNameSearch(java.lang.String name,
-		int start, int end);
+	public java.util.List<Guestbook> findByNameSearch(String name, int start,
+		int end);
 
 	/**
 	* Returns an ordered range of all the guestbooks where name = &#63;.
@@ -78,8 +78,8 @@ public interface GuestbookPersistence extends BasePersistence<Guestbook> {
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching guestbooks
 	*/
-	public java.util.List<Guestbook> findByNameSearch(java.lang.String name,
-		int start, int end,
+	public java.util.List<Guestbook> findByNameSearch(String name, int start,
+		int end,
 		com.liferay.portal.kernel.util.OrderByComparator<Guestbook> orderByComparator);
 
 	/**
@@ -96,8 +96,8 @@ public interface GuestbookPersistence extends BasePersistence<Guestbook> {
 	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching guestbooks
 	*/
-	public java.util.List<Guestbook> findByNameSearch(java.lang.String name,
-		int start, int end,
+	public java.util.List<Guestbook> findByNameSearch(String name, int start,
+		int end,
 		com.liferay.portal.kernel.util.OrderByComparator<Guestbook> orderByComparator,
 		boolean retrieveFromCache);
 
@@ -109,7 +109,7 @@ public interface GuestbookPersistence extends BasePersistence<Guestbook> {
 	* @return the first matching guestbook
 	* @throws NoSuchGuestbookException if a matching guestbook could not be found
 	*/
-	public Guestbook findByNameSearch_First(java.lang.String name,
+	public Guestbook findByNameSearch_First(String name,
 		com.liferay.portal.kernel.util.OrderByComparator<Guestbook> orderByComparator)
 		throws NoSuchGuestbookException;
 
@@ -120,7 +120,7 @@ public interface GuestbookPersistence extends BasePersistence<Guestbook> {
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching guestbook, or <code>null</code> if a matching guestbook could not be found
 	*/
-	public Guestbook fetchByNameSearch_First(java.lang.String name,
+	public Guestbook fetchByNameSearch_First(String name,
 		com.liferay.portal.kernel.util.OrderByComparator<Guestbook> orderByComparator);
 
 	/**
@@ -131,7 +131,7 @@ public interface GuestbookPersistence extends BasePersistence<Guestbook> {
 	* @return the last matching guestbook
 	* @throws NoSuchGuestbookException if a matching guestbook could not be found
 	*/
-	public Guestbook findByNameSearch_Last(java.lang.String name,
+	public Guestbook findByNameSearch_Last(String name,
 		com.liferay.portal.kernel.util.OrderByComparator<Guestbook> orderByComparator)
 		throws NoSuchGuestbookException;
 
@@ -142,7 +142,7 @@ public interface GuestbookPersistence extends BasePersistence<Guestbook> {
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching guestbook, or <code>null</code> if a matching guestbook could not be found
 	*/
-	public Guestbook fetchByNameSearch_Last(java.lang.String name,
+	public Guestbook fetchByNameSearch_Last(String name,
 		com.liferay.portal.kernel.util.OrderByComparator<Guestbook> orderByComparator);
 
 	/**
@@ -155,7 +155,7 @@ public interface GuestbookPersistence extends BasePersistence<Guestbook> {
 	* @throws NoSuchGuestbookException if a guestbook with the primary key could not be found
 	*/
 	public Guestbook[] findByNameSearch_PrevAndNext(long guestbookId,
-		java.lang.String name,
+		String name,
 		com.liferay.portal.kernel.util.OrderByComparator<Guestbook> orderByComparator)
 		throws NoSuchGuestbookException;
 
@@ -164,7 +164,7 @@ public interface GuestbookPersistence extends BasePersistence<Guestbook> {
 	*
 	* @param name the name
 	*/
-	public void removeByNameSearch(java.lang.String name);
+	public void removeByNameSearch(String name);
 
 	/**
 	* Returns the number of guestbooks where name = &#63;.
@@ -172,7 +172,7 @@ public interface GuestbookPersistence extends BasePersistence<Guestbook> {
 	* @param name the name
 	* @return the number of matching guestbooks
 	*/
-	public int countByNameSearch(java.lang.String name);
+	public int countByNameSearch(String name);
 
 	/**
 	* Caches the guestbook in the entity cache if it is enabled.

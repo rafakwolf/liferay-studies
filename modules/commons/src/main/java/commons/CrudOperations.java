@@ -24,6 +24,7 @@ public class CrudOperations {
         String name = ResourceOperations.getParam(resourceRequest, "name");
         String message = ResourceOperations.getParam(resourceRequest, "message");
         String entryId = ResourceOperations.getParam(resourceRequest, "entryId");
+        String guestbookId = ResourceOperations.getParam(resourceRequest, "guestbookId");
 
         if (name.isEmpty() || message.isEmpty()) {
             throw new PortletException("No data found");
@@ -34,6 +35,7 @@ public class CrudOperations {
                 Entry entry = EntryLocalServiceUtil.fetchEntry(Long.parseLong(entryId));
                 entry.setName(name);
                 entry.setMessage(message);
+                entry.setGuestbookId(Long.parseLong(guestbookId));
 
                 EntryLocalServiceUtil.updateEntry(entry);
             } else {
@@ -41,6 +43,7 @@ public class CrudOperations {
                 entry.setEntryId(new Random().nextLong());
                 entry.setName(name);
                 entry.setMessage(message);
+                entry.setGuestbookId(Long.parseLong(guestbookId));
 
                 EntryLocalServiceUtil.addEntry(entry);
             }
@@ -58,6 +61,7 @@ public class CrudOperations {
         JSONObject resp = JSONFactoryUtil.createJSONObject();
         resp.put("name", name);
         resp.put("message", message);
+        resp.put("guestbookId", guestbookId);
 
         try {
             ResourceOperations.writeJsonResponse(resp, resourceResponse);

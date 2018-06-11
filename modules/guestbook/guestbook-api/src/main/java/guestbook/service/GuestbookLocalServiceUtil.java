@@ -16,7 +16,8 @@ package guestbook.service;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.osgi.util.ServiceTrackerFactory;
+import org.osgi.framework.Bundle;
+import org.osgi.framework.FrameworkUtil;
 
 import org.osgi.util.tracker.ServiceTracker;
 
@@ -227,7 +228,7 @@ public class GuestbookLocalServiceUtil {
 	*
 	* @return the OSGi service identifier
 	*/
-	public static java.lang.String getOSGiServiceIdentifier() {
+	public static String getOSGiServiceIdentifier() {
 		return getService().getOSGiServiceIdentifier();
 	}
 
@@ -252,6 +253,17 @@ public class GuestbookLocalServiceUtil {
 		return _serviceTracker.getService();
 	}
 
-	private static ServiceTracker<GuestbookLocalService, GuestbookLocalService> _serviceTracker =
-		ServiceTrackerFactory.open(GuestbookLocalService.class);
+	private static ServiceTracker<GuestbookLocalService, GuestbookLocalService> _serviceTracker;
+
+	static {
+		Bundle bundle = FrameworkUtil.getBundle(GuestbookLocalService.class);
+
+		ServiceTracker<GuestbookLocalService, GuestbookLocalService> serviceTracker =
+			new ServiceTracker<GuestbookLocalService, GuestbookLocalService>(bundle.getBundleContext(),
+				GuestbookLocalService.class, null);
+
+		serviceTracker.open();
+
+		_serviceTracker = serviceTracker;
+	}
 }

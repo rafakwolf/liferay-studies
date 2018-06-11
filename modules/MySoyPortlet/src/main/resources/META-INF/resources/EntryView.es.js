@@ -2,6 +2,7 @@ import Component from 'metal-component/src/Component';
 import Soy from 'metal-soy/src/Soy';
 import templates from './EntryView.soy';
 import { requestMVCResource } from 'commons/commons.es';
+import {Config} from 'metal-state';
 
 /**
  * View Component

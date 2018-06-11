@@ -11,8 +11,12 @@ import javax.portlet.RenderResponse;
 import javax.portlet.ResourceURL;
 
 import commons.ResourceOperations;
+import guestbook.model.Guestbook;
+import guestbook.service.GuestbookLocalServiceUtil;
 import mysoyportlet.constants.MySoyPortletPortletKeys;
 import org.osgi.service.component.annotations.Component;
+
+import java.util.List;
 
 /**
  * @author rafael
@@ -44,6 +48,10 @@ public class MySoyPortletNewMVCRenderCommand
 
         template.put("siteURL", resourceURL.toString());
         template.put("portletNamespace", renderResponse.getNamespace());
+
+        int guestbookCount = GuestbookLocalServiceUtil.getGuestbooksCount();
+        List<Guestbook> guestbooks = GuestbookLocalServiceUtil.getGuestbooks(0, guestbookCount);
+        template.put("guestbooks", guestbooks);
 
         return "EntryNew";
     }

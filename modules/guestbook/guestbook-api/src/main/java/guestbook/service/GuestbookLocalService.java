@@ -76,6 +76,7 @@ public interface GuestbookLocalService extends BaseLocalService,
 	* @param guestbookId the primary key for the new guestbook
 	* @return the new guestbook
 	*/
+	@Transactional(enabled = false)
 	public Guestbook createGuestbook(long guestbookId);
 
 	/**
@@ -210,7 +211,7 @@ public interface GuestbookLocalService extends BaseLocalService,
 	*
 	* @return the OSGi service identifier
 	*/
-	public java.lang.String getOSGiServiceIdentifier();
+	public String getOSGiServiceIdentifier();
 
 	@Override
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

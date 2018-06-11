@@ -99,7 +99,7 @@ public class EntryWrapper implements Entry, ModelWrapper<Entry> {
 	}
 
 	@Override
-	public java.lang.Object clone() {
+	public Object clone() {
 		return new EntryWrapper((Entry)_entry.clone());
 	}
 
@@ -149,7 +149,7 @@ public class EntryWrapper implements Entry, ModelWrapper<Entry> {
 	* @return the message of this entry
 	*/
 	@Override
-	public java.lang.String getMessage() {
+	public String getMessage() {
 		return _entry.getMessage();
 	}
 
@@ -159,7 +159,7 @@ public class EntryWrapper implements Entry, ModelWrapper<Entry> {
 	* @return the name of this entry
 	*/
 	@Override
-	public java.lang.String getName() {
+	public String getName() {
 		return _entry.getName();
 	}
 
@@ -260,7 +260,7 @@ public class EntryWrapper implements Entry, ModelWrapper<Entry> {
 	* @param message the message of this entry
 	*/
 	@Override
-	public void setMessage(java.lang.String message) {
+	public void setMessage(String message) {
 		_entry.setMessage(message);
 	}
 
@@ -270,7 +270,7 @@ public class EntryWrapper implements Entry, ModelWrapper<Entry> {
 	* @param name the name of this entry
 	*/
 	@Override
-	public void setName(java.lang.String name) {
+	public void setName(String name) {
 		_entry.setName(name);
 	}
 
@@ -305,7 +305,7 @@ public class EntryWrapper implements Entry, ModelWrapper<Entry> {
 	}
 
 	@Override
-	public java.lang.String toString() {
+	public String toString() {
 		return _entry.toString();
 	}
 
@@ -315,7 +315,7 @@ public class EntryWrapper implements Entry, ModelWrapper<Entry> {
 	}
 
 	@Override
-	public java.lang.String toXmlString() {
+	public String toXmlString() {
 		return _entry.toXmlString();
 	}
 

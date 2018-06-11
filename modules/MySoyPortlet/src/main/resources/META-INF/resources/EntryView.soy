@@ -8,7 +8,8 @@
     {@param entries: list<[
     entryId: string,
     name: string,
-    message: string
+    message: string,
+    guestbookId: string
     ]>}
     {@param editUrl: any}
     {@param newUrl: string}
@@ -20,25 +21,29 @@
             <tr>
                 <th>Name</th>
                 <th>Message</th>
+                <th>Guestbook</th>
                 <th class="table-actions">Actions</th>
             </tr>
             </thead>
             <tbody>
                 {foreach $entry in $entries}
-                    <tr>
-                        <td>{$entry.name}</td>
-                        <td>{$entry.message}</td>
-                        <td>
-                            <div>
-                                <a class="btn btn-default" href="{$editUrl}&{$portletNamespace}entryId={$entry.entryId}" style="margin-right: 5px;">
-                                    <i class="icon-pencil"></i>{sp}Edit</a>
+                <tr>
+                    <td>{$entry.name}</td>
+                    <td>{$entry.message}</td>
+                    <td>{$entry.guestbookId}</td>
+                    <td>
+                        <div>
+                            <a class="btn btn-default" href="{$editUrl}&{$portletNamespace}entryId={$entry.entryId}"
+                               style="margin-right: 5px;">
+                                <i class="icon-pencil"></i>{sp}Edit</a>
 
-                                <button id="btnDeleteEntry" type="button" class="btn btn-default" data-onclick="deleteEntry">
-                                    <i class="icon-trash"></i>{sp}Delete
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
+                            <button id="btnDeleteEntry" type="button" class="btn btn-default"
+                                    data-onclick="deleteEntry">
+                                <i class="icon-trash"></i>{sp}Delete
+                            </button>
+                        </div>
+                    </td>
+                </tr>
                 {/foreach}
             </tbody>
         </table>

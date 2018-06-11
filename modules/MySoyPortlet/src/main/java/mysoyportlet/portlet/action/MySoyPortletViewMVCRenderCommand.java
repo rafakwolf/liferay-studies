@@ -58,7 +58,6 @@ public class MySoyPortletViewMVCRenderCommand
         template.put("siteURL", siteBaseURL);
         template.put("portletNamespace", renderResponse.getNamespace());
 
-
         return "EntryView";
     }
 

@@ -85,7 +85,7 @@ public class GuestbookWrapper implements Guestbook, ModelWrapper<Guestbook> {
 	}
 
 	@Override
-	public java.lang.Object clone() {
+	public Object clone() {
 		return new GuestbookWrapper((Guestbook)_guestbook.clone());
 	}
 
@@ -125,7 +125,7 @@ public class GuestbookWrapper implements Guestbook, ModelWrapper<Guestbook> {
 	* @return the name of this guestbook
 	*/
 	@Override
-	public java.lang.String getName() {
+	public String getName() {
 		return _guestbook.getName();
 	}
 
@@ -216,7 +216,7 @@ public class GuestbookWrapper implements Guestbook, ModelWrapper<Guestbook> {
 	* @param name the name of this guestbook
 	*/
 	@Override
-	public void setName(java.lang.String name) {
+	public void setName(String name) {
 		_guestbook.setName(name);
 	}
 
@@ -251,7 +251,7 @@ public class GuestbookWrapper implements Guestbook, ModelWrapper<Guestbook> {
 	}
 
 	@Override
-	public java.lang.String toString() {
+	public String toString() {
 		return _guestbook.toString();
 	}
 
@@ -261,7 +261,7 @@ public class GuestbookWrapper implements Guestbook, ModelWrapper<Guestbook> {
 	}
 
 	@Override
-	public java.lang.String toXmlString() {
+	public String toXmlString() {
 		return _guestbook.toXmlString();
 	}
 

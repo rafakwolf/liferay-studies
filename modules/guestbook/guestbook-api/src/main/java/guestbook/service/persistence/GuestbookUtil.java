@@ -16,13 +16,14 @@ package guestbook.service.persistence;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.osgi.util.ServiceTrackerFactory;
-
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.OrderByComparator;
 
 import guestbook.model.Guestbook;
+
+import org.osgi.framework.Bundle;
+import org.osgi.framework.FrameworkUtil;
 
 import org.osgi.util.tracker.ServiceTracker;
 
@@ -117,7 +118,7 @@ public class GuestbookUtil {
 	* @param name the name
 	* @return the matching guestbooks
 	*/
-	public static List<Guestbook> findByNameSearch(java.lang.String name) {
+	public static List<Guestbook> findByNameSearch(String name) {
 		return getPersistence().findByNameSearch(name);
 	}
 
@@ -133,8 +134,8 @@ public class GuestbookUtil {
 	* @param end the upper bound of the range of guestbooks (not inclusive)
 	* @return the range of matching guestbooks
 	*/
-	public static List<Guestbook> findByNameSearch(java.lang.String name,
-		int start, int end) {
+	public static List<Guestbook> findByNameSearch(String name, int start,
+		int end) {
 		return getPersistence().findByNameSearch(name, start, end);
 	}
 
@@ -151,8 +152,8 @@ public class GuestbookUtil {
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching guestbooks
 	*/
-	public static List<Guestbook> findByNameSearch(java.lang.String name,
-		int start, int end, OrderByComparator<Guestbook> orderByComparator) {
+	public static List<Guestbook> findByNameSearch(String name, int start,
+		int end, OrderByComparator<Guestbook> orderByComparator) {
 		return getPersistence()
 				   .findByNameSearch(name, start, end, orderByComparator);
 	}
@@ -171,8 +172,8 @@ public class GuestbookUtil {
 	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching guestbooks
 	*/
-	public static List<Guestbook> findByNameSearch(java.lang.String name,
-		int start, int end, OrderByComparator<Guestbook> orderByComparator,
+	public static List<Guestbook> findByNameSearch(String name, int start,
+		int end, OrderByComparator<Guestbook> orderByComparator,
 		boolean retrieveFromCache) {
 		return getPersistence()
 				   .findByNameSearch(name, start, end, orderByComparator,
@@ -187,7 +188,7 @@ public class GuestbookUtil {
 	* @return the first matching guestbook
 	* @throws NoSuchGuestbookException if a matching guestbook could not be found
 	*/
-	public static Guestbook findByNameSearch_First(java.lang.String name,
+	public static Guestbook findByNameSearch_First(String name,
 		OrderByComparator<Guestbook> orderByComparator)
 		throws guestbook.exception.NoSuchGuestbookException {
 		return getPersistence().findByNameSearch_First(name, orderByComparator);
@@ -200,7 +201,7 @@ public class GuestbookUtil {
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching guestbook, or <code>null</code> if a matching guestbook could not be found
 	*/
-	public static Guestbook fetchByNameSearch_First(java.lang.String name,
+	public static Guestbook fetchByNameSearch_First(String name,
 		OrderByComparator<Guestbook> orderByComparator) {
 		return getPersistence().fetchByNameSearch_First(name, orderByComparator);
 	}
@@ -213,7 +214,7 @@ public class GuestbookUtil {
 	* @return the last matching guestbook
 	* @throws NoSuchGuestbookException if a matching guestbook could not be found
 	*/
-	public static Guestbook findByNameSearch_Last(java.lang.String name,
+	public static Guestbook findByNameSearch_Last(String name,
 		OrderByComparator<Guestbook> orderByComparator)
 		throws guestbook.exception.NoSuchGuestbookException {
 		return getPersistence().findByNameSearch_Last(name, orderByComparator);
@@ -226,7 +227,7 @@ public class GuestbookUtil {
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching guestbook, or <code>null</code> if a matching guestbook could not be found
 	*/
-	public static Guestbook fetchByNameSearch_Last(java.lang.String name,
+	public static Guestbook fetchByNameSearch_Last(String name,
 		OrderByComparator<Guestbook> orderByComparator) {
 		return getPersistence().fetchByNameSearch_Last(name, orderByComparator);
 	}
@@ -241,7 +242,7 @@ public class GuestbookUtil {
 	* @throws NoSuchGuestbookException if a guestbook with the primary key could not be found
 	*/
 	public static Guestbook[] findByNameSearch_PrevAndNext(long guestbookId,
-		java.lang.String name, OrderByComparator<Guestbook> orderByComparator)
+		String name, OrderByComparator<Guestbook> orderByComparator)
 		throws guestbook.exception.NoSuchGuestbookException {
 		return getPersistence()
 				   .findByNameSearch_PrevAndNext(guestbookId, name,
@@ -253,7 +254,7 @@ public class GuestbookUtil {
 	*
 	* @param name the name
 	*/
-	public static void removeByNameSearch(java.lang.String name) {
+	public static void removeByNameSearch(String name) {
 		getPersistence().removeByNameSearch(name);
 	}
 
@@ -263,7 +264,7 @@ public class GuestbookUtil {
 	* @param name the name
 	* @return the number of matching guestbooks
 	*/
-	public static int countByNameSearch(java.lang.String name) {
+	public static int countByNameSearch(String name) {
 		return getPersistence().countByNameSearch(name);
 	}
 
@@ -419,6 +420,17 @@ public class GuestbookUtil {
 		return _serviceTracker.getService();
 	}
 
-	private static ServiceTracker<GuestbookPersistence, GuestbookPersistence> _serviceTracker =
-		ServiceTrackerFactory.open(GuestbookPersistence.class);
+	private static ServiceTracker<GuestbookPersistence, GuestbookPersistence> _serviceTracker;
+
+	static {
+		Bundle bundle = FrameworkUtil.getBundle(GuestbookPersistence.class);
+
+		ServiceTracker<GuestbookPersistence, GuestbookPersistence> serviceTracker =
+			new ServiceTracker<GuestbookPersistence, GuestbookPersistence>(bundle.getBundleContext(),
+				GuestbookPersistence.class, null);
+
+		serviceTracker.open();
+
+		_serviceTracker = serviceTracker;
+	}
 }

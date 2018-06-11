@@ -6,7 +6,9 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import commons.ResourceOperations;
 import guestbook.model.Entry;
+import guestbook.model.Guestbook;
 import guestbook.service.EntryLocalServiceUtil;
+import guestbook.service.GuestbookLocalServiceUtil;
 import mysoyportlet.constants.MySoyPortletPortletKeys;
 import org.osgi.service.component.annotations.Component;
 
@@ -14,6 +16,7 @@ import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.ResourceURL;
+import java.util.List;
 
 /**
  * @author rafael
@@ -45,6 +48,10 @@ public class MySoyPortletEditMVCRenderCommand
 
         template.put("siteURL", resourceURL.toString());
         template.put("portletNamespace", renderResponse.getNamespace());
+
+        int guestbookCount = GuestbookLocalServiceUtil.getGuestbooksCount();
+        List<Guestbook> guestbooks = GuestbookLocalServiceUtil.getGuestbooks(0, guestbookCount);
+        template.put("guestbooks", guestbooks);
 
         String entryId = GetterUtil.getString(renderRequest.getParameter("entryId"));
         long id = Long.parseLong(entryId);

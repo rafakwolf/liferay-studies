@@ -6,14 +6,33 @@
 {template .render}
     {@param id: string}
     {@param backToViewURL: string}
+    {@param guestbooks: list<[
+    guestbookId: string,
+    name: string]>}
     {@param? name: string|null}
     {@param? message: string|null}
+    {@param? guestbookId: string|null}
 
     {@param? changeName: any|null}
     {@param? changeMessage: any|null}
+    {@param? changeGuestbook: any|null}
 
     <div id="{$id}">
         <fieldset>
+
+            <div class="form-group">
+                <label for="guestbook" class="control-label">Guestbook</label>
+
+                <select name="guestbook" id="guestbook" class="field form-control" onchange="{$changeGuestbook}">
+                    {foreach $guestbook in $guestbooks}
+                        <option value="{$guestbook.guestbookId}"
+                                {if $guestbook.guestbookId == $guestbookId} selected="selected" {/if}>
+                            {$guestbook.guestbookId}{sp}-{sp}{$guestbook.name}
+                        </option>
+                    {/foreach}
+                </select>
+            </div>
+
             <div class="form-group">
                 <label for="name" class="control-label">Name</label>
                 <input class="field form-control" type="text" name="name" value="{$name ?: ''}"

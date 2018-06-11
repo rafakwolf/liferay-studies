@@ -16,13 +16,14 @@ package guestbook.service.persistence;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.osgi.util.ServiceTrackerFactory;
-
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.OrderByComparator;
 
 import guestbook.model.Entry;
+
+import org.osgi.framework.Bundle;
+import org.osgi.framework.FrameworkUtil;
 
 import org.osgi.util.tracker.ServiceTracker;
 
@@ -114,7 +115,7 @@ public class EntryUtil {
 	* @param name the name
 	* @return the matching entries
 	*/
-	public static List<Entry> findBynameFinder(java.lang.String name) {
+	public static List<Entry> findBynameFinder(String name) {
 		return getPersistence().findBynameFinder(name);
 	}
 
@@ -130,8 +131,7 @@ public class EntryUtil {
 	* @param end the upper bound of the range of entries (not inclusive)
 	* @return the range of matching entries
 	*/
-	public static List<Entry> findBynameFinder(java.lang.String name,
-		int start, int end) {
+	public static List<Entry> findBynameFinder(String name, int start, int end) {
 		return getPersistence().findBynameFinder(name, start, end);
 	}
 
@@ -148,8 +148,8 @@ public class EntryUtil {
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching entries
 	*/
-	public static List<Entry> findBynameFinder(java.lang.String name,
-		int start, int end, OrderByComparator<Entry> orderByComparator) {
+	public static List<Entry> findBynameFinder(String name, int start, int end,
+		OrderByComparator<Entry> orderByComparator) {
 		return getPersistence()
 				   .findBynameFinder(name, start, end, orderByComparator);
 	}
@@ -168,9 +168,8 @@ public class EntryUtil {
 	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching entries
 	*/
-	public static List<Entry> findBynameFinder(java.lang.String name,
-		int start, int end, OrderByComparator<Entry> orderByComparator,
-		boolean retrieveFromCache) {
+	public static List<Entry> findBynameFinder(String name, int start, int end,
+		OrderByComparator<Entry> orderByComparator, boolean retrieveFromCache) {
 		return getPersistence()
 				   .findBynameFinder(name, start, end, orderByComparator,
 			retrieveFromCache);
@@ -184,7 +183,7 @@ public class EntryUtil {
 	* @return the first matching entry
 	* @throws NoSuchEntryException if a matching entry could not be found
 	*/
-	public static Entry findBynameFinder_First(java.lang.String name,
+	public static Entry findBynameFinder_First(String name,
 		OrderByComparator<Entry> orderByComparator)
 		throws guestbook.exception.NoSuchEntryException {
 		return getPersistence().findBynameFinder_First(name, orderByComparator);
@@ -197,7 +196,7 @@ public class EntryUtil {
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching entry, or <code>null</code> if a matching entry could not be found
 	*/
-	public static Entry fetchBynameFinder_First(java.lang.String name,
+	public static Entry fetchBynameFinder_First(String name,
 		OrderByComparator<Entry> orderByComparator) {
 		return getPersistence().fetchBynameFinder_First(name, orderByComparator);
 	}
@@ -210,7 +209,7 @@ public class EntryUtil {
 	* @return the last matching entry
 	* @throws NoSuchEntryException if a matching entry could not be found
 	*/
-	public static Entry findBynameFinder_Last(java.lang.String name,
+	public static Entry findBynameFinder_Last(String name,
 		OrderByComparator<Entry> orderByComparator)
 		throws guestbook.exception.NoSuchEntryException {
 		return getPersistence().findBynameFinder_Last(name, orderByComparator);
@@ -223,7 +222,7 @@ public class EntryUtil {
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching entry, or <code>null</code> if a matching entry could not be found
 	*/
-	public static Entry fetchBynameFinder_Last(java.lang.String name,
+	public static Entry fetchBynameFinder_Last(String name,
 		OrderByComparator<Entry> orderByComparator) {
 		return getPersistence().fetchBynameFinder_Last(name, orderByComparator);
 	}
@@ -238,7 +237,7 @@ public class EntryUtil {
 	* @throws NoSuchEntryException if a entry with the primary key could not be found
 	*/
 	public static Entry[] findBynameFinder_PrevAndNext(long entryId,
-		java.lang.String name, OrderByComparator<Entry> orderByComparator)
+		String name, OrderByComparator<Entry> orderByComparator)
 		throws guestbook.exception.NoSuchEntryException {
 		return getPersistence()
 				   .findBynameFinder_PrevAndNext(entryId, name,
@@ -250,7 +249,7 @@ public class EntryUtil {
 	*
 	* @param name the name
 	*/
-	public static void removeBynameFinder(java.lang.String name) {
+	public static void removeBynameFinder(String name) {
 		getPersistence().removeBynameFinder(name);
 	}
 
@@ -260,7 +259,7 @@ public class EntryUtil {
 	* @param name the name
 	* @return the number of matching entries
 	*/
-	public static int countBynameFinder(java.lang.String name) {
+	public static int countBynameFinder(String name) {
 		return getPersistence().countBynameFinder(name);
 	}
 
@@ -415,6 +414,16 @@ public class EntryUtil {
 		return _serviceTracker.getService();
 	}
 
-	private static ServiceTracker<EntryPersistence, EntryPersistence> _serviceTracker =
-		ServiceTrackerFactory.open(EntryPersistence.class);
+	private static ServiceTracker<EntryPersistence, EntryPersistence> _serviceTracker;
+
+	static {
+		Bundle bundle = FrameworkUtil.getBundle(EntryPersistence.class);
+
+		ServiceTracker<EntryPersistence, EntryPersistence> serviceTracker = new ServiceTracker<EntryPersistence, EntryPersistence>(bundle.getBundleContext(),
+				EntryPersistence.class, null);
+
+		serviceTracker.open();
+
+		_serviceTracker = serviceTracker;
+	}
 }

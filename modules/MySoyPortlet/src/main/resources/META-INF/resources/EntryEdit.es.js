@@ -29,16 +29,29 @@ class Edit extends Component {
     changeMessage(event) {
         this.entry.message = event.target.value;
     }
+
+    changeGuestbook(event) {
+        this.entry.guestbookId = event.target.value;
+    }
 }
 
 Edit.STATE = {
+    id: Config.string(),
+    backToViewURL: Config.string(),
+    siteURL: Config.string(),
+    portletNamespace: Config.string(),
     entry: Config.shapeOf({
         entryId: Config.string(),
         name: Config.string(),
-        message: Config.string()
+        message: Config.string(),
+        guestbookId: Config.string()
     }),
-    siteURL: Config.string(),
-    portletNamespace: Config.string()
+    guestbooks: Config.arrayOf(
+        Config.shapeOf({
+            guestbookId: Config.string(),
+            name: Config.string()
+        })
+    )
 };
 
 // Register component

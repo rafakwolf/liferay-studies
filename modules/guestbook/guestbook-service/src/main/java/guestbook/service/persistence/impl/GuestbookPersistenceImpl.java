@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.spring.extender.service.ServiceReference;
 
@@ -40,6 +41,8 @@ import guestbook.model.impl.GuestbookModelImpl;
 import guestbook.service.persistence.GuestbookPersistence;
 
 import java.io.Serializable;
+
+import java.lang.reflect.InvocationHandler;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -778,8 +781,6 @@ public class GuestbookPersistenceImpl extends BasePersistenceImpl<Guestbook>
 
 	@Override
 	protected Guestbook removeImpl(Guestbook guestbook) {
-		guestbook = toUnwrappedModel(guestbook);
-
 		Session session = null;
 
 		try {
@@ -810,9 +811,23 @@ public class GuestbookPersistenceImpl extends BasePersistenceImpl<Guestbook>
 
 	@Override
 	public Guestbook updateImpl(Guestbook guestbook) {
-		guestbook = toUnwrappedModel(guestbook);
-
 		boolean isNew = guestbook.isNew();
+
+		if (!(guestbook instanceof GuestbookModelImpl)) {
+			InvocationHandler invocationHandler = null;
+
+			if (ProxyUtil.isProxyClass(guestbook.getClass())) {
+				invocationHandler = ProxyUtil.getInvocationHandler(guestbook);
+
+				throw new IllegalArgumentException(
+					"Implement ModelWrapper in guestbook proxy " +
+					invocationHandler.getClass());
+			}
+
+			throw new IllegalArgumentException(
+				"Implement ModelWrapper in custom Guestbook implementation " +
+				guestbook.getClass());
+		}
 
 		GuestbookModelImpl guestbookModelImpl = (GuestbookModelImpl)guestbook;
 
@@ -880,23 +895,6 @@ public class GuestbookPersistenceImpl extends BasePersistenceImpl<Guestbook>
 		guestbook.resetOriginalValues();
 
 		return guestbook;
-	}
-
-	protected Guestbook toUnwrappedModel(Guestbook guestbook) {
-		if (guestbook instanceof GuestbookImpl) {
-			return guestbook;
-		}
-
-		GuestbookImpl guestbookImpl = new GuestbookImpl();
-
-		guestbookImpl.setNew(guestbook.isNew());
-		guestbookImpl.setPrimaryKey(guestbook.getPrimaryKey());
-
-		guestbookImpl.setGuestbookId(guestbook.getGuestbookId());
-		guestbookImpl.setGroupId(guestbook.getGroupId());
-		guestbookImpl.setName(guestbook.getName());
-
-		return guestbookImpl;
 	}
 
 	/**
