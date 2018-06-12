@@ -17,7 +17,7 @@ import javax.portlet.Portlet;
 	property = {
 		"com.liferay.portlet.display-category=category.sample",
 		"com.liferay.portlet.instanceable=false",
-		"com.liferay.portlet.single-page-application=false",
+		"com.liferay.portlet.single-page-application=true",
 		"javax.portlet.display-name=MySoyPortlet Portlet",
 		"javax.portlet.init-param.template-path=/",
 		"javax.portlet.init-param.view-template=EntryView",

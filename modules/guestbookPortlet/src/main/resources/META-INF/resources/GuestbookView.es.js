@@ -2,7 +2,7 @@ import Component from 'metal-component/src/Component';
 import Soy from 'metal-soy/src/Soy';
 import templates from './GuestbookView.soy';
 import {Config} from 'metal-state';
-import { requestMVCResource } from 'commons/commons.es';
+import { requestMVCResource, showNotification } from 'commons/commons.es';
 
 class View extends Component {
 
@@ -42,7 +42,7 @@ class View extends Component {
 
                                     requestMVCResource(this.siteURL+"&"+this.portletNamespace+"act=delete", prefixedData)
                                         .then(resp => {
-                                            alert("Guestbook deleted!");
+                                            showNotification('Deleted', 'Guestbook deleted!', 'success', 'notifications');
                                             Liferay.SPA.app.reloadPage();
                                         }).catch(e => {
                                         console.log(e);

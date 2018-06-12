@@ -10,6 +10,9 @@
     {@param? changeName: any|null}
 
     <div id="{$id}">
+
+        <div id="notifications"></div>
+
         <fieldset>
             <div class="form-group">
                 <label for="name" class="control-label">Name</label>
@@ -23,7 +26,7 @@
                 <button class="btn btn-primary" style="margin-right: 5px;" data-onclick="updateGuestbook">
                     <i class="icon-check-circle"></i>{sp}Update</button>
                 <a id="backtoview" class="btn btn-default" href="{$backToViewURL}">
-                    <i class="icon-undo"></i>{sp}Cancel</a>
+                    <i class="icon-undo"></i>{sp}Back</a>
             </div>
 
         </fieldset>

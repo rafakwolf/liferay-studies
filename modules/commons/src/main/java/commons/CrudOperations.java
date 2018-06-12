@@ -72,7 +72,7 @@ public class CrudOperations {
 
     public static void saveOrUpdateGuestbook(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws PortletException {
 
-        String name = GetterUtil.getString(resourceRequest.getParameter("name"));
+        String name = ResourceOperations.getParam(resourceRequest,"name");
         String guestbookId = ResourceOperations.getParam(resourceRequest, "guestbookId");
 
 

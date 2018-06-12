@@ -2,17 +2,18 @@ package mysoyportlet.portlet.action;
 
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import com.liferay.portal.kernel.template.Template;
-import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.WebKeys;
+import commons.ResourceOperations;
 import guestbook.model.Entry;
 import guestbook.service.EntryLocalServiceUtil;
+import mysoyportlet.constants.MySoyPortletPortletKeys;
+import org.osgi.service.component.annotations.Component;
 
-import java.util.List;
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
-
-import org.osgi.service.component.annotations.Component;
+import javax.portlet.ResourceURL;
+import java.util.List;
 
 /**
  * @author rafael
@@ -36,11 +37,6 @@ public class MySoyPortletViewMVCRenderCommand
         Template template = (Template) renderRequest.getAttribute(
                 WebKeys.TEMPLATE);
 
-        ThemeDisplay themeDisplay = (ThemeDisplay) renderRequest.getAttribute(
-                WebKeys.THEME_DISPLAY);
-
-        template.put("layouts", themeDisplay.getLayouts());
-
         PortletURL newUrl = renderResponse.createRenderURL();
         newUrl.setParameter("mvcRenderCommandName", "EntryNew");
         template.put("newUrl", newUrl.toString());
@@ -49,13 +45,17 @@ public class MySoyPortletViewMVCRenderCommand
         editUrl.setParameter("mvcRenderCommandName", "EntryEdit");
         template.put("editUrl", editUrl.toString());
 
+        PortletURL viewUrl = renderResponse.createRenderURL();
+        viewUrl.setParameter("mvcRenderCommandName", "EntryView");
+        template.put("viewUrl", viewUrl.toString());
+
         List<Entry> entries = getEntries();
         template.put("entries", entries);
 
-        String siteBaseURL = themeDisplay.getPortalURL().concat(
-                themeDisplay.getPathFriendlyURLPrivateGroup()).concat("/");
+        ResourceURL resourceURL = ResourceOperations.getPortletResourceURL(renderResponse,
+                MySoyPortletPortletKeys.MVC_RESOURCE_COMMAND);
 
-        template.put("siteURL", siteBaseURL);
+        template.put("siteURL", resourceURL.toString());
         template.put("portletNamespace", renderResponse.getNamespace());
 
         return "EntryView";

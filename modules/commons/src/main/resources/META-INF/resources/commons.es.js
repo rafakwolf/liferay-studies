@@ -11,25 +11,43 @@ function requestMVCResource(url, data, method = 'POST') {
             credentials: 'include',
             method: method
         })
-            .then(response => {
-                if (response.status < 400) {
-                    response.json().then(json => resolve(json));
-                    return;
-                }
+        .then(response => {
+            if (response.status < 400) {
+                response.json().then(json => resolve(json));
+                return;
+            }
 
-                response.json()
-                    .then(json => reject(json))
-                    .catch((e) => {
-                        if (response.status == 401) {
-                            Liferay.SPA.app.reloadPage();
-                        } else {
-                            reject({error: true, isUnexpected: true, errorMessage: e.message});
-                        }
-                    });
+            response.json()
+                .then(json => reject(json))
+                .catch((e) => {
+                    if (response.status == 401) {
+                        Liferay.SPA.app.reloadPage();
+                    } else {
+                        reject({error: true, isUnexpected: true, errorMessage: e.message});
+                    }
+                });
 
-            })
-            .catch((e) => reject({error: true, isUnexpected: true, errorMessage: e.message}));
+        })
+        .catch((e) => reject({error: true, isUnexpected: true, errorMessage: e.message}));
     });
 }
 
-export { requestMVCResource }
+function showNotification(title, message, type, targetElementId) {
+    new Liferay.Alert(
+        {
+            closeable: true,
+            delay: {
+                hide: 1000,
+                show: 0
+            },
+            duration: 1000,
+            icon: type,
+            message: message,
+            namespace: 'notification',
+            title: title,
+            type: type
+        }
+    ).render(document.getElementById(targetElementId));
+}
+
+export { requestMVCResource, showNotification }

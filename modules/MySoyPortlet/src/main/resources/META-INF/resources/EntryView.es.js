@@ -1,7 +1,7 @@
 import Component from 'metal-component/src/Component';
 import Soy from 'metal-soy/src/Soy';
 import templates from './EntryView.soy';
-import { requestMVCResource } from 'commons/commons.es';
+import {requestMVCResource} from 'commons/commons.es';
 import {Config} from 'metal-state';
 
 /**
@@ -41,7 +41,7 @@ class View extends Component {
 
                                     const prefixedData = Liferay.Util.ns(this.portletNamespace, {entryId});
 
-                                    requestMVCResource(this.siteURL+"&"+this.portletNamespace+"act=delete", prefixedData)
+                                    requestMVCResource(this.siteURL + "&" + this.portletNamespace + "act=delete", prefixedData)
                                         .then(resp => {
                                             alert("Entry deleted!");
                                             Liferay.SPA.app.reloadPage();
@@ -62,6 +62,19 @@ class View extends Component {
     }
 
 }
+
+View.STATE = {
+    siteURL: Config.string(),
+    viewUrl: Config.string(),
+    entries: Config.arrayOf(
+        Config.shapeOf({
+            entryId: Config.string(),
+            name: Config.string(),
+            message: Config.string(),
+            guestbookId: Config.string()
+        })
+    )
+};
 
 // Register component
 Soy.register(View, templates);

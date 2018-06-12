@@ -2,7 +2,7 @@ import Component from 'metal-component/src/Component';
 import Soy from 'metal-soy/src/Soy';
 import {Config} from 'metal-state';
 import templates from './GuestbookEdit.soy';
-import { requestMVCResource } from 'commons/commons.es';
+import { requestMVCResource, showNotification } from 'commons/commons.es';
 
 /**
  * Edit Guestbook Component
@@ -14,8 +14,7 @@ class Edit extends Component {
 
         requestMVCResource(this.siteURL, prefixedData)
             .then(resp => {
-                alert("Guestbook updated!");
-                document.getElementById("backtoview").click();
+                showNotification('Updated', 'Guestbook updated!', 'success', 'notifications');
             }).catch(e => {
             console.log(e);
             alert('Ops, something is wrong :(' + e.message);
@@ -23,7 +22,7 @@ class Edit extends Component {
     }
 
     changeName(event) {
-        this.name = event.target.value;
+        this.guestbook.name = event.target.value;
     }
 }
 

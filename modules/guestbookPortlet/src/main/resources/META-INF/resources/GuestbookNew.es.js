@@ -2,7 +2,7 @@ import Component from 'metal-component/src/Component';
 import Soy from 'metal-soy/src/Soy';
 import {Config} from 'metal-state';
 import templates from './GuestbookNew.soy';
-import { requestMVCResource } from 'commons/commons.es';
+import { requestMVCResource, showNotification } from 'commons/commons.es';
 
 /**
  * New Guestbook Component
@@ -13,13 +13,11 @@ class New extends Component {
         const prefixedData = Liferay.Util.ns(this.portletNamespace, {name: this.name});
 
         requestMVCResource(this.siteURL, prefixedData)
-            .then(resp => {
-                alert("Guestbook is stored!");
-                document.getElementById("backtoview").click();
+            .then(() => {
+                showNotification('Success', 'Guestbook stored!', 'success', 'notifications');
             }).catch(e => {
-            console.log(e);
-            alert('Ops, something is wrong :(' + e.message);
-        });
+                alert('Ops, something is wrong :(' + e.message);
+            });
     }
 
     changeName(event) {
