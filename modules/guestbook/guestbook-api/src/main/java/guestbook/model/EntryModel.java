@@ -61,6 +61,21 @@ public interface EntryModel extends BaseModel<Entry> {
 	public void setPrimaryKey(long primaryKey);
 
 	/**
+	 * Returns the uuid of this entry.
+	 *
+	 * @return the uuid of this entry
+	 */
+	@AutoEscape
+	public String getUuid();
+
+	/**
+	 * Sets the uuid of this entry.
+	 *
+	 * @param uuid the uuid of this entry
+	 */
+	public void setUuid(String uuid);
+
+	/**
 	 * Returns the entry ID of this entry.
 	 *
 	 * @return the entry ID of this entry
@@ -119,6 +134,21 @@ public interface EntryModel extends BaseModel<Entry> {
 	public void setMessage(String message);
 
 	/**
+	 * Returns the email of this entry.
+	 *
+	 * @return the email of this entry
+	 */
+	@AutoEscape
+	public String getEmail();
+
+	/**
+	 * Sets the email of this entry.
+	 *
+	 * @param email the email of this entry
+	 */
+	public void setEmail(String email);
+
+	/**
 	 * Returns the guestbook ID of this entry.
 	 *
 	 * @return the guestbook ID of this entry
@@ -131,6 +161,49 @@ public interface EntryModel extends BaseModel<Entry> {
 	 * @param guestbookId the guestbook ID of this entry
 	 */
 	public void setGuestbookId(long guestbookId);
+
+	/**
+	 * Returns the user ID of this entry.
+	 *
+	 * @return the user ID of this entry
+	 */
+	public long getUserId();
+
+	/**
+	 * Sets the user ID of this entry.
+	 *
+	 * @param userId the user ID of this entry
+	 */
+	public void setUserId(long userId);
+
+	/**
+	 * Returns the user uuid of this entry.
+	 *
+	 * @return the user uuid of this entry
+	 */
+	public String getUserUuid();
+
+	/**
+	 * Sets the user uuid of this entry.
+	 *
+	 * @param userUuid the user uuid of this entry
+	 */
+	public void setUserUuid(String userUuid);
+
+	/**
+	 * Returns the user name of this entry.
+	 *
+	 * @return the user name of this entry
+	 */
+	@AutoEscape
+	public String getUserName();
+
+	/**
+	 * Sets the user name of this entry.
+	 *
+	 * @param userName the user name of this entry
+	 */
+	public void setUserName(String userName);
 
 	@Override
 	public boolean isNew();

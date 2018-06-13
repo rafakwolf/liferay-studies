@@ -167,6 +167,16 @@ public interface EntryLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public Entry fetchEntry(long entryId);
 
+	/**
+	* Returns the entry matching the UUID and group.
+	*
+	* @param uuid the entry's UUID
+	* @param groupId the primary key of the group
+	* @return the matching entry, or <code>null</code> if a matching entry could not be found
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public Entry fetchEntryByUuidAndGroupId(String uuid, long groupId);
+
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ActionableDynamicQuery getActionableDynamicQuery();
 
@@ -201,6 +211,18 @@ public interface EntryLocalService extends BaseLocalService,
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public Entry getEntry(long entryId) throws PortalException;
+
+	/**
+	* Returns the entry matching the UUID and group.
+	*
+	* @param uuid the entry's UUID
+	* @param groupId the primary key of the group
+	* @return the matching entry
+	* @throws PortalException if a matching entry could not be found
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public Entry getEntryByUuidAndGroupId(String uuid, long groupId)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();

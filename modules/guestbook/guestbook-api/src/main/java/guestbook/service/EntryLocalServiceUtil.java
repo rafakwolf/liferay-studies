@@ -176,6 +176,18 @@ public class EntryLocalServiceUtil {
 		return getService().fetchEntry(entryId);
 	}
 
+	/**
+	* Returns the entry matching the UUID and group.
+	*
+	* @param uuid the entry's UUID
+	* @param groupId the primary key of the group
+	* @return the matching entry, or <code>null</code> if a matching entry could not be found
+	*/
+	public static guestbook.model.Entry fetchEntryByUuidAndGroupId(
+		String uuid, long groupId) {
+		return getService().fetchEntryByUuidAndGroupId(uuid, groupId);
+	}
+
 	public static com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery getActionableDynamicQuery() {
 		return getService().getActionableDynamicQuery();
 	}
@@ -215,6 +227,20 @@ public class EntryLocalServiceUtil {
 	public static guestbook.model.Entry getEntry(long entryId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().getEntry(entryId);
+	}
+
+	/**
+	* Returns the entry matching the UUID and group.
+	*
+	* @param uuid the entry's UUID
+	* @param groupId the primary key of the group
+	* @return the matching entry
+	* @throws PortalException if a matching entry could not be found
+	*/
+	public static guestbook.model.Entry getEntryByUuidAndGroupId(String uuid,
+		long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().getEntryByUuidAndGroupId(uuid, groupId);
 	}
 
 	public static com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery getIndexableActionableDynamicQuery() {

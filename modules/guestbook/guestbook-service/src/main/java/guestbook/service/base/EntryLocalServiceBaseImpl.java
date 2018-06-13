@@ -214,6 +214,18 @@ public abstract class EntryLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	/**
+	 * Returns the entry matching the UUID and group.
+	 *
+	 * @param uuid the entry's UUID
+	 * @param groupId the primary key of the group
+	 * @return the matching entry, or <code>null</code> if a matching entry could not be found
+	 */
+	@Override
+	public Entry fetchEntryByUuidAndGroupId(String uuid, long groupId) {
+		return entryPersistence.fetchByUUID_G(uuid, groupId);
+	}
+
+	/**
 	 * Returns the entry with the primary key.
 	 *
 	 * @param entryId the primary key of the entry
@@ -273,6 +285,20 @@ public abstract class EntryLocalServiceBaseImpl extends BaseLocalServiceImpl
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException {
 		return entryPersistence.findByPrimaryKey(primaryKeyObj);
+	}
+
+	/**
+	 * Returns the entry matching the UUID and group.
+	 *
+	 * @param uuid the entry's UUID
+	 * @param groupId the primary key of the group
+	 * @return the matching entry
+	 * @throws PortalException if a matching entry could not be found
+	 */
+	@Override
+	public Entry getEntryByUuidAndGroupId(String uuid, long groupId)
+		throws PortalException {
+		return entryPersistence.findByUUID_G(uuid, groupId);
 	}
 
 	/**

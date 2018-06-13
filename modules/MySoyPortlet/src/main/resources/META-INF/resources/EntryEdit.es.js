@@ -2,7 +2,7 @@ import Component from 'metal-component/src/Component';
 import Soy from 'metal-soy/src/Soy';
 import {Config} from 'metal-state';
 import templates from './EntryEdit.soy';
-import { requestMVCResource } from 'commons/commons.es';
+import { requestMVCResource, showNotification } from 'commons/commons.es';
 
 /**
  * Edit Entry Component
@@ -14,9 +14,8 @@ class Edit extends Component {
 
         requestMVCResource(this.siteURL, prefixedData)
             .then(resp => {
-                alert("Entry is updated!");
-                document.getElementById("backtoview").click();
-            }).catch(e => {
+                showNotification("Success", "Entry updated!", "success", "notifications");
+         }).catch(e => {
             console.log(e);
             alert('Ops, something is wrong :(' + e.message);
         });
@@ -24,6 +23,10 @@ class Edit extends Component {
 
     changeName(event) {
         this.entry.name = event.target.value;
+    }
+
+    changeEmail(event) {
+        this.entry.email = event.target.value;
     }
 
     changeMessage(event) {
@@ -43,6 +46,7 @@ Edit.STATE = {
     entry: Config.shapeOf({
         entryId: Config.string(),
         name: Config.string(),
+        email: Config.string(),
         message: Config.string(),
         guestbookId: Config.string()
     }),

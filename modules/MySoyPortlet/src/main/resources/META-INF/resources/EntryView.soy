@@ -6,10 +6,11 @@
 {template .render}
     {@param id: string}
     {@param entries: list<[
-    entryId: string,
-    name: string,
-    message: string,
-    guestbookId: string
+        entryId: string,
+        name: string,
+        message: string,
+        email: string,
+        guestbookId: string
     ]>}
     {@param editUrl: any}
     {@param newUrl: string}
@@ -19,6 +20,8 @@
 
         <h1>Entries</h1>
 
+        <div id="notifications"></div>
+
         <div>
             <a class="btn btn-default" href="{$newUrl}"><i class="icon-plus"></i>{sp}New Entry</a>
         </div>
@@ -27,6 +30,7 @@
             <thead>
             <tr>
                 <th>Name</th>
+                <th>Email</th>
                 <th>Message</th>
                 <th>Guestbook</th>
                 <th class="table-actions">Actions</th>
@@ -36,6 +40,7 @@
                 {foreach $entry in $entries}
                 <tr>
                     <td>{$entry.name}</td>
+                    <td>{$entry.email}</td>
                     <td>{$entry.message}</td>
                     <td>{$entry.guestbookId}</td>
                     <td>
@@ -45,7 +50,7 @@
                                 <i class="icon-pencil"></i>{sp}Edit</a>
 
                             <button id="btnDeleteEntry" type="button" class="btn btn-default"
-                                    data-onclick="deleteEntry">
+                                    data-onclick="deleteEntry" entryid="{$entry.entryId}">
                                 <i class="icon-trash"></i>{sp}Delete
                             </button>
                         </div>

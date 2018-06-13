@@ -177,6 +177,19 @@ public class EntryLocalServiceWrapper implements EntryLocalService,
 		return _entryLocalService.fetchEntry(entryId);
 	}
 
+	/**
+	* Returns the entry matching the UUID and group.
+	*
+	* @param uuid the entry's UUID
+	* @param groupId the primary key of the group
+	* @return the matching entry, or <code>null</code> if a matching entry could not be found
+	*/
+	@Override
+	public guestbook.model.Entry fetchEntryByUuidAndGroupId(String uuid,
+		long groupId) {
+		return _entryLocalService.fetchEntryByUuidAndGroupId(uuid, groupId);
+	}
+
 	@Override
 	public com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery getActionableDynamicQuery() {
 		return _entryLocalService.getActionableDynamicQuery();
@@ -219,6 +232,21 @@ public class EntryLocalServiceWrapper implements EntryLocalService,
 	public guestbook.model.Entry getEntry(long entryId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _entryLocalService.getEntry(entryId);
+	}
+
+	/**
+	* Returns the entry matching the UUID and group.
+	*
+	* @param uuid the entry's UUID
+	* @param groupId the primary key of the group
+	* @return the matching entry
+	* @throws PortalException if a matching entry could not be found
+	*/
+	@Override
+	public guestbook.model.Entry getEntryByUuidAndGroupId(String uuid,
+		long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _entryLocalService.getEntryByUuidAndGroupId(uuid, groupId);
 	}
 
 	@Override

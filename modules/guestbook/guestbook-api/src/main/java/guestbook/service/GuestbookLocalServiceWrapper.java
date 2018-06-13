@@ -180,6 +180,20 @@ public class GuestbookLocalServiceWrapper implements GuestbookLocalService,
 		return _guestbookLocalService.fetchGuestbook(guestbookId);
 	}
 
+	/**
+	* Returns the guestbook matching the UUID and group.
+	*
+	* @param uuid the guestbook's UUID
+	* @param groupId the primary key of the group
+	* @return the matching guestbook, or <code>null</code> if a matching guestbook could not be found
+	*/
+	@Override
+	public guestbook.model.Guestbook fetchGuestbookByUuidAndGroupId(
+		String uuid, long groupId) {
+		return _guestbookLocalService.fetchGuestbookByUuidAndGroupId(uuid,
+			groupId);
+	}
+
 	@Override
 	public com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery getActionableDynamicQuery() {
 		return _guestbookLocalService.getActionableDynamicQuery();
@@ -196,6 +210,21 @@ public class GuestbookLocalServiceWrapper implements GuestbookLocalService,
 	public guestbook.model.Guestbook getGuestbook(long guestbookId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return _guestbookLocalService.getGuestbook(guestbookId);
+	}
+
+	/**
+	* Returns the guestbook matching the UUID and group.
+	*
+	* @param uuid the guestbook's UUID
+	* @param groupId the primary key of the group
+	* @return the matching guestbook
+	* @throws PortalException if a matching guestbook could not be found
+	*/
+	@Override
+	public guestbook.model.Guestbook getGuestbookByUuidAndGroupId(String uuid,
+		long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _guestbookLocalService.getGuestbookByUuidAndGroupId(uuid, groupId);
 	}
 
 	/**

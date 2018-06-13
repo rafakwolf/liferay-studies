@@ -56,6 +56,7 @@ public class GuestbookWrapper implements Guestbook, ModelWrapper<Guestbook> {
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("uuid", getUuid());
 		attributes.put("guestbookId", getGuestbookId());
 		attributes.put("groupId", getGroupId());
 		attributes.put("name", getName());
@@ -65,6 +66,12 @@ public class GuestbookWrapper implements Guestbook, ModelWrapper<Guestbook> {
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		String uuid = (String)attributes.get("uuid");
+
+		if (uuid != null) {
+			setUuid(uuid);
+		}
+
 		Long guestbookId = (Long)attributes.get("guestbookId");
 
 		if (guestbookId != null) {
@@ -142,6 +149,16 @@ public class GuestbookWrapper implements Guestbook, ModelWrapper<Guestbook> {
 	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _guestbook.getPrimaryKeyObj();
+	}
+
+	/**
+	* Returns the uuid of this guestbook.
+	*
+	* @return the uuid of this guestbook
+	*/
+	@Override
+	public String getUuid() {
+		return _guestbook.getUuid();
 	}
 
 	@Override
@@ -238,6 +255,16 @@ public class GuestbookWrapper implements Guestbook, ModelWrapper<Guestbook> {
 	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		_guestbook.setPrimaryKeyObj(primaryKeyObj);
+	}
+
+	/**
+	* Sets the uuid of this guestbook.
+	*
+	* @param uuid the uuid of this guestbook
+	*/
+	@Override
+	public void setUuid(String uuid) {
+		_guestbook.setUuid(uuid);
 	}
 
 	@Override

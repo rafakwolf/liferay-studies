@@ -61,6 +61,21 @@ public interface GuestbookModel extends BaseModel<Guestbook> {
 	public void setPrimaryKey(long primaryKey);
 
 	/**
+	 * Returns the uuid of this guestbook.
+	 *
+	 * @return the uuid of this guestbook
+	 */
+	@AutoEscape
+	public String getUuid();
+
+	/**
+	 * Sets the uuid of this guestbook.
+	 *
+	 * @param uuid the uuid of this guestbook
+	 */
+	public void setUuid(String uuid);
+
+	/**
 	 * Returns the guestbook ID of this guestbook.
 	 *
 	 * @return the guestbook ID of this guestbook

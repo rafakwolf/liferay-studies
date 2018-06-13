@@ -33,6 +33,7 @@ public class GuestbookSoap implements Serializable {
 	public static GuestbookSoap toSoapModel(Guestbook model) {
 		GuestbookSoap soapModel = new GuestbookSoap();
 
+		soapModel.setUuid(model.getUuid());
 		soapModel.setGuestbookId(model.getGuestbookId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setName(model.getName());
@@ -88,6 +89,14 @@ public class GuestbookSoap implements Serializable {
 		setGuestbookId(pk);
 	}
 
+	public String getUuid() {
+		return _uuid;
+	}
+
+	public void setUuid(String uuid) {
+		_uuid = uuid;
+	}
+
 	public long getGuestbookId() {
 		return _guestbookId;
 	}
@@ -112,6 +121,7 @@ public class GuestbookSoap implements Serializable {
 		_name = name;
 	}
 
+	private String _uuid;
 	private long _guestbookId;
 	private long _groupId;
 	private String _name;

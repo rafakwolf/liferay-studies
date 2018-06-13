@@ -21,7 +21,8 @@ public class ResourceOperations {
     }
 
     public static String getParam(PortletRequest portletRequest, String param) {
-        return GetterUtil.getString(portletRequest.getParameter(param));
+        String paramValue = GetterUtil.getString(portletRequest.getParameter(param));
+        return (paramValue != null && !paramValue.isEmpty() && !paramValue.equals("undefined") && !paramValue.equals("null")) ? paramValue : "0";
     }
 
     public static void writeJsonResponse(JSONObject jsonObject, ResourceResponse response) throws IOException {

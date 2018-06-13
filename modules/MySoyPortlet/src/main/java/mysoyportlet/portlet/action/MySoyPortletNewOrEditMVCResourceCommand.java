@@ -1,12 +1,8 @@
 package mysoyportlet.portlet.action;
 
-import com.liferay.portal.kernel.json.JSONFactoryUtil;
-import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCResourceCommand;
-import com.liferay.portal.kernel.util.GetterUtil;
 import commons.CrudOperations;
-import guestbook.model.Entry;
-import guestbook.service.EntryLocalServiceUtil;
+import commons.ResourceOperations;
 import mysoyportlet.constants.MySoyPortletPortletKeys;
 import org.osgi.service.component.annotations.Component;
 
@@ -14,8 +10,6 @@ import javax.portlet.PortletException;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 import java.io.IOException;
-import java.io.Writer;
-import java.util.List;
 
 @Component(
         property = {
@@ -31,38 +25,26 @@ public class MySoyPortletNewOrEditMVCResourceCommand implements MVCResourceComma
     @Override
     public boolean serveResource(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws PortletException {
 
-        String action = GetterUtil.getString(resourceRequest.getParameter("act"));
+        String action = ResourceOperations.getParam(resourceRequest, "act");
 
         if (action != null && !action.isEmpty()){
             if (action.equals("delete")){
-                CrudOperations.removeEntry(resourceRequest, resourceResponse);
-            }
-
-            if (action.equals("pagination")) {
-
-                int page = parseWithDefault(GetterUtil.getString(resourceRequest.getParameter("page")),1);
-                int pageLen = parseWithDefault(GetterUtil.getString(resourceRequest.getParameter("pageLen")),5);
-
-                int start = ((page -1) * pageLen);
-                List<Entry> entries = EntryLocalServiceUtil.getEntries(start, pageLen);
-
-                JSONObject json = JSONFactoryUtil.createJSONObject();
-                json.put("entries", entries);
-
-                resourceResponse.setContentType("application/json");
                 try {
-                    Writer writer = resourceResponse.getWriter();
-                    writer.write(json.toString());
+                    CrudOperations.removeEntry(resourceRequest, resourceResponse);
+                    return true;
                 } catch (IOException e) {
                     e.printStackTrace();
+                    return false;
                 }
-
-                return true;
             }
-
         }
 
-        CrudOperations.saveOrUpdateEntry(resourceRequest, resourceResponse);
+        try {
+            CrudOperations.saveOrUpdateEntry(resourceRequest, resourceResponse);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
         return true;
     }
 }

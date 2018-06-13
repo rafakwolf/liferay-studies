@@ -168,6 +168,16 @@ public interface GuestbookLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public Guestbook fetchGuestbook(long guestbookId);
 
+	/**
+	* Returns the guestbook matching the UUID and group.
+	*
+	* @param uuid the guestbook's UUID
+	* @param groupId the primary key of the group
+	* @return the matching guestbook, or <code>null</code> if a matching guestbook could not be found
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public Guestbook fetchGuestbookByUuidAndGroupId(String uuid, long groupId);
+
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ActionableDynamicQuery getActionableDynamicQuery();
 
@@ -180,6 +190,18 @@ public interface GuestbookLocalService extends BaseLocalService,
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public Guestbook getGuestbook(long guestbookId) throws PortalException;
+
+	/**
+	* Returns the guestbook matching the UUID and group.
+	*
+	* @param uuid the guestbook's UUID
+	* @param groupId the primary key of the group
+	* @return the matching guestbook
+	* @throws PortalException if a matching guestbook could not be found
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public Guestbook getGuestbookByUuidAndGroupId(String uuid, long groupId)
+		throws PortalException;
 
 	/**
 	* Returns a range of all the guestbooks.

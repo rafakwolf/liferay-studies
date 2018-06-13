@@ -1,7 +1,7 @@
 import Component from 'metal-component/src/Component';
 import Soy from 'metal-soy/src/Soy';
 import templates from './EntryView.soy';
-import {requestMVCResource} from 'commons/commons.es';
+import {requestMVCResource, showNotification} from 'commons/commons.es';
 import {Config} from 'metal-state';
 
 /**
@@ -43,12 +43,12 @@ class View extends Component {
 
                                     requestMVCResource(this.siteURL + "&" + this.portletNamespace + "act=delete", prefixedData)
                                         .then(resp => {
-                                            alert("Entry deleted!");
+                                            showNotification("Success", "Entry deleted!", "success", "notifications");
                                             Liferay.SPA.app.reloadPage();
-                                        }).catch(e => {
-                                        console.log(e);
-                                        alert('Ops, something is wrong :(' + e.message);
-                                    });
+                                         }).catch(e => {
+                                            console.log(e);
+                                            alert('Ops, something is wrong :(' + e.message);
+                                        });
 
                                     modal.hide();
                                 }
@@ -71,6 +71,7 @@ View.STATE = {
             entryId: Config.string(),
             name: Config.string(),
             message: Config.string(),
+            email: Config.string(),
             guestbookId: Config.string()
         })
     )

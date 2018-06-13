@@ -56,17 +56,27 @@ public class EntryWrapper implements Entry, ModelWrapper<Entry> {
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("uuid", getUuid());
 		attributes.put("entryId", getEntryId());
 		attributes.put("groupId", getGroupId());
 		attributes.put("name", getName());
 		attributes.put("message", getMessage());
+		attributes.put("email", getEmail());
 		attributes.put("guestbookId", getGuestbookId());
+		attributes.put("userId", getUserId());
+		attributes.put("userName", getUserName());
 
 		return attributes;
 	}
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		String uuid = (String)attributes.get("uuid");
+
+		if (uuid != null) {
+			setUuid(uuid);
+		}
+
 		Long entryId = (Long)attributes.get("entryId");
 
 		if (entryId != null) {
@@ -91,10 +101,28 @@ public class EntryWrapper implements Entry, ModelWrapper<Entry> {
 			setMessage(message);
 		}
 
+		String email = (String)attributes.get("email");
+
+		if (email != null) {
+			setEmail(email);
+		}
+
 		Long guestbookId = (Long)attributes.get("guestbookId");
 
 		if (guestbookId != null) {
 			setGuestbookId(guestbookId);
+		}
+
+		Long userId = (Long)attributes.get("userId");
+
+		if (userId != null) {
+			setUserId(userId);
+		}
+
+		String userName = (String)attributes.get("userName");
+
+		if (userName != null) {
+			setUserName(userName);
 		}
 	}
 
@@ -106,6 +134,16 @@ public class EntryWrapper implements Entry, ModelWrapper<Entry> {
 	@Override
 	public int compareTo(Entry entry) {
 		return _entry.compareTo(entry);
+	}
+
+	/**
+	* Returns the email of this entry.
+	*
+	* @return the email of this entry
+	*/
+	@Override
+	public String getEmail() {
+		return _entry.getEmail();
 	}
 
 	/**
@@ -178,6 +216,46 @@ public class EntryWrapper implements Entry, ModelWrapper<Entry> {
 		return _entry.getPrimaryKeyObj();
 	}
 
+	/**
+	* Returns the user ID of this entry.
+	*
+	* @return the user ID of this entry
+	*/
+	@Override
+	public long getUserId() {
+		return _entry.getUserId();
+	}
+
+	/**
+	* Returns the user name of this entry.
+	*
+	* @return the user name of this entry
+	*/
+	@Override
+	public String getUserName() {
+		return _entry.getUserName();
+	}
+
+	/**
+	* Returns the user uuid of this entry.
+	*
+	* @return the user uuid of this entry
+	*/
+	@Override
+	public String getUserUuid() {
+		return _entry.getUserUuid();
+	}
+
+	/**
+	* Returns the uuid of this entry.
+	*
+	* @return the uuid of this entry
+	*/
+	@Override
+	public String getUuid() {
+		return _entry.getUuid();
+	}
+
 	@Override
 	public int hashCode() {
 		return _entry.hashCode();
@@ -206,6 +284,16 @@ public class EntryWrapper implements Entry, ModelWrapper<Entry> {
 	@Override
 	public void setCachedModel(boolean cachedModel) {
 		_entry.setCachedModel(cachedModel);
+	}
+
+	/**
+	* Sets the email of this entry.
+	*
+	* @param email the email of this entry
+	*/
+	@Override
+	public void setEmail(String email) {
+		_entry.setEmail(email);
 	}
 
 	/**
@@ -292,6 +380,46 @@ public class EntryWrapper implements Entry, ModelWrapper<Entry> {
 	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		_entry.setPrimaryKeyObj(primaryKeyObj);
+	}
+
+	/**
+	* Sets the user ID of this entry.
+	*
+	* @param userId the user ID of this entry
+	*/
+	@Override
+	public void setUserId(long userId) {
+		_entry.setUserId(userId);
+	}
+
+	/**
+	* Sets the user name of this entry.
+	*
+	* @param userName the user name of this entry
+	*/
+	@Override
+	public void setUserName(String userName) {
+		_entry.setUserName(userName);
+	}
+
+	/**
+	* Sets the user uuid of this entry.
+	*
+	* @param userUuid the user uuid of this entry
+	*/
+	@Override
+	public void setUserUuid(String userUuid) {
+		_entry.setUserUuid(userUuid);
+	}
+
+	/**
+	* Sets the uuid of this entry.
+	*
+	* @param uuid the uuid of this entry
+	*/
+	@Override
+	public void setUuid(String uuid) {
+		_entry.setUuid(uuid);
 	}
 
 	@Override

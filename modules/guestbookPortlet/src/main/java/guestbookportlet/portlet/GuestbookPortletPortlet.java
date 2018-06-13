@@ -28,7 +28,7 @@ import org.osgi.service.component.annotations.Reference;
 		"com.liferay.portlet.display-category=category.sample",
 		"com.liferay.portlet.instanceable=false",
 		"com.liferay.portlet.single-page-application=true",
-		"javax.portlet.display-name=guestbookPortlet Portlet",
+		"javax.portlet.display-name=Lista de Convidados (Soy)",
 		"javax.portlet.init-param.template-path=/",
 		"javax.portlet.init-param.view-template=GuestbookView",
 		"javax.portlet.name=" + GuestbookPortletPortletKeys.GuestbookPortlet,

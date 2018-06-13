@@ -5,7 +5,7 @@
 <service-builder package-path="guestbook">
     <namespace>guestbook</namespace>
 
-    <entity name="Entry" local-service="true" remote-service="true" uuid="false">
+    <entity name="Entry" local-service="true" remote-service="true" uuid="true">
 
         <column name="entryId" primary="true" type="long"/>
 
@@ -13,8 +13,12 @@
 
         <column name="name" type="String"/>
         <column name="message" type="String"/>
+        <column name="email" type="String"/>
 
         <column name="guestbookId" type="long"/>
+
+        <column name="userId" type="long" />
+        <column name="userName" type="String" />
 
         <finder name="nameFinder" return-type="Collection">
             <finder-column name="name"/>
@@ -22,9 +26,7 @@
 
     </entity>
 
-    <entity name="Guestbook" local-service="true" remote-service="true" uuid="false">
-
-        <!-- PK fields -->
+    <entity name="Guestbook" local-service="true" remote-service="true" uuid="true">
 
         <column name="guestbookId" primary="true" type="long"/>
 
