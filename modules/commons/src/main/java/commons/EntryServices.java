@@ -8,7 +8,7 @@ import guestbook.service.EntryLocalServiceUtil;
 
 public class EntryServices {
 
-    public void save(String entryName, String email, String message, long userId, long guestbookId) {
+    public Entry save(String entryName, String email, String message, long userId, long guestbookId) {
 
         try {
             Long newEntryId = CounterLocalServiceUtil.increment(Entry.class.getName());
@@ -22,9 +22,10 @@ public class EntryServices {
             entry.setGuestbookId(guestbookId);
             entry.setUserId(userId);
 
-            EntryLocalServiceUtil.addEntry(entry);
+            return EntryLocalServiceUtil.addEntry(entry);
         } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
     }
 

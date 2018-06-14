@@ -35,8 +35,7 @@ class View extends Component {
                             label: 'Delete',
                             on: {
                                 click: () => {
-
-                                    const guestbookId = $('#btnDeleteGuestbook').attr('guestbookid');
+                                    const guestbookId = $(event.target).attr('guestbookid');
 
                                     const prefixedData = Liferay.Util.ns(this.portletNamespace, {guestbookId});
 

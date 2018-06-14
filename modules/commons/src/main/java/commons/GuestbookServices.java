@@ -6,15 +6,24 @@ import guestbook.model.impl.GuestbookImpl;
 import guestbook.service.GuestbookLocalServiceUtil;
 
 public class GuestbookServices {
-    public void save(String guestbookName) {
+    public Guestbook save(String guestbookName) {
         try {
             Long newGuestbookId = CounterLocalServiceUtil.increment(Guestbook.class.getName());
+
             Guestbook guestbook = new GuestbookImpl();
             guestbook.setGuestbookId(newGuestbookId);
             guestbook.setName(guestbookName);
-            GuestbookLocalServiceUtil.addGuestbook(guestbook);
+            guestbook.setNew(true);
+
+            //guestbook.persist();
+
+
+
+
+            return guestbook;
         } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
     }
 

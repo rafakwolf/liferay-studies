@@ -9,7 +9,8 @@ import {Config} from 'metal-state';
  */
 class View extends Component {
 
-    deleteEntry() {
+    deleteEntry(event) {
+
         YUI().use(
             'aui-modal',
             (Y) => {
@@ -37,7 +38,7 @@ class View extends Component {
                             label: 'Delete',
                             on: {
                                 click: () => {
-                                    const entryId = $('#btnDeleteEntry').attr('entryid');
+                                    const entryId = $(event.target).attr('entryid');
 
                                     const prefixedData = Liferay.Util.ns(this.portletNamespace, {entryId});
 

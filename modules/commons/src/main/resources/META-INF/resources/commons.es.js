@@ -12,7 +12,9 @@ function requestMVCResource(url, data, method = 'POST') {
             method: method
         })
         .then(response => {
-            try {
+            const contentType = response.headers.get("content-type");
+
+            if (contentType && contentType.indexOf("application/json") !== -1) {
                 if (response.status < 400) {
                     response.json().then(json => resolve(json));
                     return;
@@ -27,11 +29,22 @@ function requestMVCResource(url, data, method = 'POST') {
                             reject({error: true, isUnexpected: true, errorMessage: e.message});
                         }
                     });
-            } catch (e) {
-                console.error(e.toString());
-                alert("Ops, something is wrong." + e.toString());
-            }
+            } else {
+                if (response.status < 400) {
+                    response.text().then(txt => resolve(txt));
+                    return;
+                }
 
+                response.text()
+                    .then(txt => reject(txt))
+                    .catch((e) => {
+                        if (response.status == 401) {
+                            Liferay.SPA.app.reloadPage();
+                        } else {
+                            reject({error: true, isUnexpected: true, errorMessage: e.message});
+                        }
+                    });
+            }
         })
         .catch((e) => reject({error: true, isUnexpected: true, errorMessage: e.message}));
     });
