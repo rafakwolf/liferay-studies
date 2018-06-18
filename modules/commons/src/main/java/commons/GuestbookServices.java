@@ -15,10 +15,7 @@ public class GuestbookServices {
             guestbook.setName(guestbookName);
             guestbook.setNew(true);
 
-            //guestbook.persist();
-
-
-
+            guestbook.persist();
 
             return guestbook;
         } catch (Exception e) {

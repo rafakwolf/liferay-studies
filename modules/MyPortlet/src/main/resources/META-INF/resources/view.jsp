@@ -20,7 +20,7 @@
         <liferay-ui:search-container-column-text property="email"/>
         <liferay-ui:search-container-column-text property="guestbookId" name="Guestbook"/>
 
-        <liferay-ui:search-container-column-jsp path="/gridButtons.jsp" align="right"/>
+        <liferay-ui:search-container-column-jsp path="/gridButtons.jsp" align="right" name="Actions"/>
     </liferay-ui:search-container-row>
 
     <liferay-ui:search-iterator/>
