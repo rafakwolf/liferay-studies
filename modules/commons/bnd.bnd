@@ -5,9 +5,7 @@ Include-Resource: package.json
 Web-ContextPath: /commons
 Import-Package:\
   com.liferay.arquillian.extension.junit.bridge.deployment; resolution:="optional";\
-  org.jboss.osgi.metadata; resolution:="optional";\
-  org.jboss.shrinkwrap.descriptor.spi.node; resolution:="optional";\
-  com.liferay.arquillian.containter.remote.enricher
+  com.liferay.arquillian.container.remote.enricher
 Export-Package:\
   commons
 Provide-Capability:\

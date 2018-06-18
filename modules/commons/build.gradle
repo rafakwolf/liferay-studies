@@ -12,25 +12,17 @@ dependencies {
 	testCompile "org.powermock:powermock-api-mockito:1.6.6"
 	testCompile "org.powermock:powermock-classloading-xstream:1.6.6"
 	testCompile "org.osgi:org.osgi.core:6.0.0"
-
-	testIntegrationCompile group: "com.liferay", name: "com.liferay.arquillian.extension.junit.bridge", version: "1.0.7"
-	testIntegrationCompile group: "com.liferay", name: "com.liferay.item.selector.api", version: "2.2.0"
-	testIntegrationCompile group: "com.liferay", name: "com.liferay.registry.api", version: "1.0.0"
-	testIntegrationCompile group: "com.liferay.portal", name: "com.liferay.portal.impl", version: "2.6.0"
-	testIntegrationCompile group: "com.liferay.portal", name: "com.liferay.portal.kernel", version: "2.0.0"
-
+	testCompile 'junit:junit:4.12'
 
 	testIntegrationCompile group: "com.liferay.arquillian", name: "com.liferay.arquillian.arquillian-container-liferay", version: "1.0.6"
-	testIntegrationCompile group: "junit", name: "junit", version: "4.12"
 	testIntegrationCompile group: "org.jboss.arquillian.junit", name: "arquillian-junit-container", version: "1.1.11.Final"
-    testIntegrationCompile group: "com.liferay", name: "com.liferay.arquillian.extension.junit.bridge", version: "1.0.7"
+	testIntegrationCompile group: "com.liferay", name: "com.liferay.arquillian.extension.junit.bridge", version: "1.0.7"
+	testIntegrationCompile group: "com.liferay", name: "com.liferay.item.selector.api", version: "2.2.0"
+    testIntegrationCompile group: "com.liferay.portal", name: "com.liferay.portal.impl", version: "2.6.0"
+    testIntegrationCompile group: "com.liferay.portal", name: "com.liferay.portal.kernel", version: "2.0.0"
+	testIntegrationCompile group: "com.liferay", name: "com.liferay.registry.api", version: "1.0.0"
+	testIntegrationCompile group: "junit", name: "junit", version: "4.12"
 
-	testCompile project(':modules:guestbook:guestbook-api')
-	testCompile project(':modules:guestbook:guestbook-service')
-
-	testCompile 'junit:junit:4.12'
-}
-
-liferay {
-	deployDir = new File("${projectDir}/build/testlibs")
+	testIntegrationCompile project(':modules:guestbook:guestbook-api')
+	testIntegrationCompile project(':modules:guestbook:guestbook-service')
 }
