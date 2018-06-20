@@ -44,15 +44,15 @@ Edit.STATE = {
     siteURL: Config.string(),
     portletNamespace: Config.string(),
     entry: Config.shapeOf({
-        entryId: Config.string(),
+        entryId: Config.number(),
         name: Config.string(),
         email: Config.string(),
         message: Config.string(),
-        guestbookId: Config.string()
+        guestbookId: Config.number()
     }),
     guestbooks: Config.arrayOf(
         Config.shapeOf({
-            guestbookId: Config.string(),
+            guestbookId: Config.number(),
             name: Config.string()
         })
     )

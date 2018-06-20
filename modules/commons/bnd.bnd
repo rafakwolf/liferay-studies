@@ -3,9 +3,6 @@ Bundle-SymbolicName: commons
 Bundle-Version: 1.0.0
 Include-Resource: package.json
 Web-ContextPath: /commons
-Import-Package:\
-  com.liferay.arquillian.extension.junit.bridge.deployment; resolution:="optional";\
-  com.liferay.arquillian.container.remote.enricher
 Export-Package:\
   commons
 Provide-Capability:\

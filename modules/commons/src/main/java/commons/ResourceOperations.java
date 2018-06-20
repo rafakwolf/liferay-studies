@@ -3,20 +3,24 @@ package commons;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.util.GetterUtil;
 
-import javax.portlet.PortletRequest;
-import javax.portlet.RenderResponse;
-import javax.portlet.ResourceResponse;
-import javax.portlet.ResourceURL;
+import javax.portlet.*;
 import java.io.IOException;
 import java.io.Writer;
 
 public class ResourceOperations {
 
     public static ResourceURL getPortletResourceURL(
-            RenderResponse renderResponse, String resourceID) {
+            RenderResponse response, String resourceID) {
 
-        ResourceURL resourceURL = renderResponse.createResourceURL();
-        resourceURL.setResourceID(resourceID);
+        ResourceURL resourceURL = null;
+        try {
+            resourceURL = response.createResourceURL();
+            resourceURL.setResourceID(resourceID);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+
         return resourceURL;
     }
 

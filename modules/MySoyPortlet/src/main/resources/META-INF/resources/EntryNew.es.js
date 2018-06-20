@@ -43,12 +43,12 @@ EntryNew.STATE = {
     name: Config.string(),
     message: Config.string(),
     email: Config.string(),
-    guestbookId: Config.string(),
+    guestbookId: Config.number(),
     siteURL: Config.string(),
     portletNamespace: Config.string(),
     guestbooks: Config.arrayOf(
         Config.shapeOf({
-            guestbookId: Config.string(),
+            guestbookId: Config.number(),
             name: Config.string()
         })
     )

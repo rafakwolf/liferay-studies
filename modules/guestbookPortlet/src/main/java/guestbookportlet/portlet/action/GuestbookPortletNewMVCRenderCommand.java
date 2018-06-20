@@ -23,7 +23,7 @@ import javax.portlet.*;
 public class GuestbookPortletNewMVCRenderCommand implements MVCRenderCommand {
 
     @Override
-    public String render(RenderRequest renderRequest, RenderResponse renderResponse) throws PortletException {
+    public String render(RenderRequest renderRequest, RenderResponse renderResponse) {
         Template template = (Template) renderRequest.getAttribute(
                 WebKeys.TEMPLATE);
 

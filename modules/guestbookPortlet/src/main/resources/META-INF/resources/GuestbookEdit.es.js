@@ -28,7 +28,7 @@ class Edit extends Component {
 
 Edit.STATE = {
     guestbook: Config.shapeOf({
-        guestbookId: Config.string(),
+        guestbookId: Config.number(),
         name: Config.string()
     }),
     siteURL: Config.string(),

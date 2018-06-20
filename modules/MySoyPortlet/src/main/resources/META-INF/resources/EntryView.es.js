@@ -69,11 +69,11 @@ View.STATE = {
     viewUrl: Config.string(),
     entries: Config.arrayOf(
         Config.shapeOf({
-            entryId: Config.string(),
+            entryId: Config.number(),
             name: Config.string(),
             message: Config.string(),
             email: Config.string(),
-            guestbookId: Config.string()
+            guestbookId: Config.number()
         })
     )
 };
