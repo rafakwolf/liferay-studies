@@ -62,6 +62,7 @@ class View extends Component {
 }
 
 View.STATE = {
+    portletId: Config.string(),
     siteURL: Config.string(),
     portletNamespace: Config.string()
 };

@@ -27,7 +27,7 @@ public class GuestbookPortletNewOrEditMVCResourceCommand extends BaseMVCResource
                 CrudOperations.removeGuestbook(resourceRequest, resourceResponse);
             }
         }
-
-        CrudOperations.saveOrUpdateGuestbook(resourceRequest, resourceResponse);
+        else
+            CrudOperations.saveOrUpdateGuestbook(resourceRequest, resourceResponse);
     }
 }

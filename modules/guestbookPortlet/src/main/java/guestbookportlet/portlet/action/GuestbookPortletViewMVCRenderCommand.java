@@ -2,6 +2,8 @@ package guestbookportlet.portlet.action;
 
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import com.liferay.portal.kernel.template.Template;
+import com.liferay.portal.kernel.theme.PortletDisplay;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.WebKeys;
 import commons.ResourceOperations;
 import guestbook.model.Guestbook;
@@ -36,6 +38,12 @@ public class GuestbookPortletViewMVCRenderCommand
 
         Template template = (Template) renderRequest.getAttribute(
                 WebKeys.TEMPLATE);
+
+        ThemeDisplay themeDisplay= (ThemeDisplay)renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
+        PortletDisplay portletDisplay= themeDisplay.getPortletDisplay();
+        String portletId= portletDisplay.getId();
+        template.put("portletId", portletId);
+
 
         PortletURL navigationURL = renderResponse.createRenderURL();
         navigationURL.setParameter("mvcRenderCommandName", "GuestbookView");
