@@ -1,0 +1,8 @@
+Bundle-Name: guestbook-tests
+Bundle-SymbolicName: guestbook-tests
+Bundle-Version: 1.0.0
+Import-Package:\
+    com.liferay.arquillian.extension.junit.bridge.deployment; resolution:="optional";\
+    org.jboss.osgi.metadata; resolution:="optional";\
+    org.jboss.shrinkwrap.descriptor.spi.node; resolution:="optional";\
+    com.liferay.arquillian.containter.remote.enricher
