@@ -1,17 +1,12 @@
 package myrestapi.application;
 
-import java.util.Collections;
-import java.util.Set;
+import org.osgi.service.component.annotations.Component;
 
-import javax.print.attribute.standard.Media;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-
-import com.liferay.portal.kernel.json.JSONFactoryUtil;
-import com.liferay.portal.kernel.json.JSONObject;
-import org.osgi.service.component.annotations.Component;
+import java.util.Collections;
+import java.util.Set;
 
 /**
  * @author rafael.wolf
@@ -23,7 +18,7 @@ import org.osgi.service.component.annotations.Component;
 public class MyRestApiApplication extends Application {
 
 	public Set<Object> getSingletons() {
-		return Collections.<Object>singleton(this);
+		return Collections.singleton(this);
 	}
 
 	@GET
