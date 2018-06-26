@@ -1,0 +1,5 @@
+Bundle-Name: MyDateField
+Bundle-SymbolicName: MyDateField
+Bundle-Version: 1.0.0
+Liferay-JS-Config: /META-INF/resources/config.js
+Web-ContextPath: /MyDateField-form-field
