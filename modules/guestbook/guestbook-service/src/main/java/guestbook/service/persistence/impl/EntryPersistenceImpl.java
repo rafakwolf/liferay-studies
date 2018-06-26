@@ -876,82 +876,88 @@ public class EntryPersistenceImpl extends BasePersistenceImpl<Entry>
 	private static final String _FINDER_COLUMN_UUID_G_UUID_2 = "entry.uuid = ? AND ";
 	private static final String _FINDER_COLUMN_UUID_G_UUID_3 = "(entry.uuid IS NULL OR entry.uuid = '') AND ";
 	private static final String _FINDER_COLUMN_UUID_G_GROUPID_2 = "entry.groupId = ?";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_NAMEFINDER =
-		new FinderPath(EntryModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_G_G = new FinderPath(EntryModelImpl.ENTITY_CACHE_ENABLED,
 			EntryModelImpl.FINDER_CACHE_ENABLED, EntryImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findBynameFinder",
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByG_G",
 			new String[] {
-				String.class.getName(),
+				Long.class.getName(), Long.class.getName(),
 				
 			Integer.class.getName(), Integer.class.getName(),
 				OrderByComparator.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_NAMEFINDER =
-		new FinderPath(EntryModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_G = new FinderPath(EntryModelImpl.ENTITY_CACHE_ENABLED,
 			EntryModelImpl.FINDER_CACHE_ENABLED, EntryImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findBynameFinder",
-			new String[] { String.class.getName() },
-			EntryModelImpl.NAME_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_NAMEFINDER = new FinderPath(EntryModelImpl.ENTITY_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByG_G",
+			new String[] { Long.class.getName(), Long.class.getName() },
+			EntryModelImpl.GROUPID_COLUMN_BITMASK |
+			EntryModelImpl.GUESTBOOKID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_G = new FinderPath(EntryModelImpl.ENTITY_CACHE_ENABLED,
 			EntryModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countBynameFinder",
-			new String[] { String.class.getName() });
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_G",
+			new String[] { Long.class.getName(), Long.class.getName() });
 
 	/**
-	 * Returns all the entries where name = &#63;.
+	 * Returns all the entries where groupId = &#63; and guestbookId = &#63;.
 	 *
-	 * @param name the name
+	 * @param groupId the group ID
+	 * @param guestbookId the guestbook ID
 	 * @return the matching entries
 	 */
 	@Override
-	public List<Entry> findBynameFinder(String name) {
-		return findBynameFinder(name, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	public List<Entry> findByG_G(long groupId, long guestbookId) {
+		return findByG_G(groupId, guestbookId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the entries where name = &#63;.
+	 * Returns a range of all the entries where groupId = &#63; and guestbookId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link EntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param name the name
+	 * @param groupId the group ID
+	 * @param guestbookId the guestbook ID
 	 * @param start the lower bound of the range of entries
 	 * @param end the upper bound of the range of entries (not inclusive)
 	 * @return the range of matching entries
 	 */
 	@Override
-	public List<Entry> findBynameFinder(String name, int start, int end) {
-		return findBynameFinder(name, start, end, null);
+	public List<Entry> findByG_G(long groupId, long guestbookId, int start,
+		int end) {
+		return findByG_G(groupId, guestbookId, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the entries where name = &#63;.
+	 * Returns an ordered range of all the entries where groupId = &#63; and guestbookId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link EntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param name the name
+	 * @param groupId the group ID
+	 * @param guestbookId the guestbook ID
 	 * @param start the lower bound of the range of entries
 	 * @param end the upper bound of the range of entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching entries
 	 */
 	@Override
-	public List<Entry> findBynameFinder(String name, int start, int end,
-		OrderByComparator<Entry> orderByComparator) {
-		return findBynameFinder(name, start, end, orderByComparator, true);
+	public List<Entry> findByG_G(long groupId, long guestbookId, int start,
+		int end, OrderByComparator<Entry> orderByComparator) {
+		return findByG_G(groupId, guestbookId, start, end, orderByComparator,
+			true);
 	}
 
 	/**
-	 * Returns an ordered range of all the entries where name = &#63;.
+	 * Returns an ordered range of all the entries where groupId = &#63; and guestbookId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link EntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param name the name
+	 * @param groupId the group ID
+	 * @param guestbookId the guestbook ID
 	 * @param start the lower bound of the range of entries
 	 * @param end the upper bound of the range of entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
@@ -959,8 +965,9 @@ public class EntryPersistenceImpl extends BasePersistenceImpl<Entry>
 	 * @return the ordered range of matching entries
 	 */
 	@Override
-	public List<Entry> findBynameFinder(String name, int start, int end,
-		OrderByComparator<Entry> orderByComparator, boolean retrieveFromCache) {
+	public List<Entry> findByG_G(long groupId, long guestbookId, int start,
+		int end, OrderByComparator<Entry> orderByComparator,
+		boolean retrieveFromCache) {
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
@@ -968,12 +975,16 @@ public class EntryPersistenceImpl extends BasePersistenceImpl<Entry>
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 				(orderByComparator == null)) {
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_NAMEFINDER;
-			finderArgs = new Object[] { name };
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_G;
+			finderArgs = new Object[] { groupId, guestbookId };
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_NAMEFINDER;
-			finderArgs = new Object[] { name, start, end, orderByComparator };
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_G_G;
+			finderArgs = new Object[] {
+					groupId, guestbookId,
+					
+					start, end, orderByComparator
+				};
 		}
 
 		List<Entry> list = null;
@@ -984,7 +995,8 @@ public class EntryPersistenceImpl extends BasePersistenceImpl<Entry>
 
 			if ((list != null) && !list.isEmpty()) {
 				for (Entry entry : list) {
-					if (!Objects.equals(name, entry.getName())) {
+					if ((groupId != entry.getGroupId()) ||
+							(guestbookId != entry.getGuestbookId())) {
 						list = null;
 
 						break;
@@ -997,28 +1009,18 @@ public class EntryPersistenceImpl extends BasePersistenceImpl<Entry>
 			StringBundler query = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(3 +
+				query = new StringBundler(4 +
 						(orderByComparator.getOrderByFields().length * 2));
 			}
 			else {
-				query = new StringBundler(3);
+				query = new StringBundler(4);
 			}
 
 			query.append(_SQL_SELECT_ENTRY_WHERE);
 
-			boolean bindName = false;
+			query.append(_FINDER_COLUMN_G_G_GROUPID_2);
 
-			if (name == null) {
-				query.append(_FINDER_COLUMN_NAMEFINDER_NAME_1);
-			}
-			else if (name.equals("")) {
-				query.append(_FINDER_COLUMN_NAMEFINDER_NAME_3);
-			}
-			else {
-				bindName = true;
-
-				query.append(_FINDER_COLUMN_NAMEFINDER_NAME_2);
-			}
+			query.append(_FINDER_COLUMN_G_G_GUESTBOOKID_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -1040,9 +1042,9 @@ public class EntryPersistenceImpl extends BasePersistenceImpl<Entry>
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				if (bindName) {
-					qPos.add(name);
-				}
+				qPos.add(groupId);
+
+				qPos.add(guestbookId);
 
 				if (!pagination) {
 					list = (List<Entry>)QueryUtil.list(q, getDialect(), start,
@@ -1075,28 +1077,32 @@ public class EntryPersistenceImpl extends BasePersistenceImpl<Entry>
 	}
 
 	/**
-	 * Returns the first entry in the ordered set where name = &#63;.
+	 * Returns the first entry in the ordered set where groupId = &#63; and guestbookId = &#63;.
 	 *
-	 * @param name the name
+	 * @param groupId the group ID
+	 * @param guestbookId the guestbook ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching entry
 	 * @throws NoSuchEntryException if a matching entry could not be found
 	 */
 	@Override
-	public Entry findBynameFinder_First(String name,
+	public Entry findByG_G_First(long groupId, long guestbookId,
 		OrderByComparator<Entry> orderByComparator) throws NoSuchEntryException {
-		Entry entry = fetchBynameFinder_First(name, orderByComparator);
+		Entry entry = fetchByG_G_First(groupId, guestbookId, orderByComparator);
 
 		if (entry != null) {
 			return entry;
 		}
 
-		StringBundler msg = new StringBundler(4);
+		StringBundler msg = new StringBundler(6);
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("name=");
-		msg.append(name);
+		msg.append("groupId=");
+		msg.append(groupId);
+
+		msg.append(", guestbookId=");
+		msg.append(guestbookId);
 
 		msg.append("}");
 
@@ -1104,70 +1110,17 @@ public class EntryPersistenceImpl extends BasePersistenceImpl<Entry>
 	}
 
 	/**
-	 * Returns the first entry in the ordered set where name = &#63;.
+	 * Returns the first entry in the ordered set where groupId = &#63; and guestbookId = &#63;.
 	 *
-	 * @param name the name
+	 * @param groupId the group ID
+	 * @param guestbookId the guestbook ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching entry, or <code>null</code> if a matching entry could not be found
 	 */
 	@Override
-	public Entry fetchBynameFinder_First(String name,
+	public Entry fetchByG_G_First(long groupId, long guestbookId,
 		OrderByComparator<Entry> orderByComparator) {
-		List<Entry> list = findBynameFinder(name, 0, 1, orderByComparator);
-
-		if (!list.isEmpty()) {
-			return list.get(0);
-		}
-
-		return null;
-	}
-
-	/**
-	 * Returns the last entry in the ordered set where name = &#63;.
-	 *
-	 * @param name the name
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching entry
-	 * @throws NoSuchEntryException if a matching entry could not be found
-	 */
-	@Override
-	public Entry findBynameFinder_Last(String name,
-		OrderByComparator<Entry> orderByComparator) throws NoSuchEntryException {
-		Entry entry = fetchBynameFinder_Last(name, orderByComparator);
-
-		if (entry != null) {
-			return entry;
-		}
-
-		StringBundler msg = new StringBundler(4);
-
-		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-		msg.append("name=");
-		msg.append(name);
-
-		msg.append("}");
-
-		throw new NoSuchEntryException(msg.toString());
-	}
-
-	/**
-	 * Returns the last entry in the ordered set where name = &#63;.
-	 *
-	 * @param name the name
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching entry, or <code>null</code> if a matching entry could not be found
-	 */
-	@Override
-	public Entry fetchBynameFinder_Last(String name,
-		OrderByComparator<Entry> orderByComparator) {
-		int count = countBynameFinder(name);
-
-		if (count == 0) {
-			return null;
-		}
-
-		List<Entry> list = findBynameFinder(name, count - 1, count,
+		List<Entry> list = findByG_G(groupId, guestbookId, 0, 1,
 				orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -1178,17 +1131,79 @@ public class EntryPersistenceImpl extends BasePersistenceImpl<Entry>
 	}
 
 	/**
-	 * Returns the entries before and after the current entry in the ordered set where name = &#63;.
+	 * Returns the last entry in the ordered set where groupId = &#63; and guestbookId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param guestbookId the guestbook ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching entry
+	 * @throws NoSuchEntryException if a matching entry could not be found
+	 */
+	@Override
+	public Entry findByG_G_Last(long groupId, long guestbookId,
+		OrderByComparator<Entry> orderByComparator) throws NoSuchEntryException {
+		Entry entry = fetchByG_G_Last(groupId, guestbookId, orderByComparator);
+
+		if (entry != null) {
+			return entry;
+		}
+
+		StringBundler msg = new StringBundler(6);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("groupId=");
+		msg.append(groupId);
+
+		msg.append(", guestbookId=");
+		msg.append(guestbookId);
+
+		msg.append("}");
+
+		throw new NoSuchEntryException(msg.toString());
+	}
+
+	/**
+	 * Returns the last entry in the ordered set where groupId = &#63; and guestbookId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param guestbookId the guestbook ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching entry, or <code>null</code> if a matching entry could not be found
+	 */
+	@Override
+	public Entry fetchByG_G_Last(long groupId, long guestbookId,
+		OrderByComparator<Entry> orderByComparator) {
+		int count = countByG_G(groupId, guestbookId);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<Entry> list = findByG_G(groupId, guestbookId, count - 1, count,
+				orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the entries before and after the current entry in the ordered set where groupId = &#63; and guestbookId = &#63;.
 	 *
 	 * @param entryId the primary key of the current entry
-	 * @param name the name
+	 * @param groupId the group ID
+	 * @param guestbookId the guestbook ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next entry
 	 * @throws NoSuchEntryException if a entry with the primary key could not be found
 	 */
 	@Override
-	public Entry[] findBynameFinder_PrevAndNext(long entryId, String name,
-		OrderByComparator<Entry> orderByComparator) throws NoSuchEntryException {
+	public Entry[] findByG_G_PrevAndNext(long entryId, long groupId,
+		long guestbookId, OrderByComparator<Entry> orderByComparator)
+		throws NoSuchEntryException {
 		Entry entry = findByPrimaryKey(entryId);
 
 		Session session = null;
@@ -1198,13 +1213,13 @@ public class EntryPersistenceImpl extends BasePersistenceImpl<Entry>
 
 			Entry[] array = new EntryImpl[3];
 
-			array[0] = getBynameFinder_PrevAndNext(session, entry, name,
-					orderByComparator, true);
+			array[0] = getByG_G_PrevAndNext(session, entry, groupId,
+					guestbookId, orderByComparator, true);
 
 			array[1] = entry;
 
-			array[2] = getBynameFinder_PrevAndNext(session, entry, name,
-					orderByComparator, false);
+			array[2] = getByG_G_PrevAndNext(session, entry, groupId,
+					guestbookId, orderByComparator, false);
 
 			return array;
 		}
@@ -1216,35 +1231,25 @@ public class EntryPersistenceImpl extends BasePersistenceImpl<Entry>
 		}
 	}
 
-	protected Entry getBynameFinder_PrevAndNext(Session session, Entry entry,
-		String name, OrderByComparator<Entry> orderByComparator,
-		boolean previous) {
+	protected Entry getByG_G_PrevAndNext(Session session, Entry entry,
+		long groupId, long guestbookId,
+		OrderByComparator<Entry> orderByComparator, boolean previous) {
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
-			query = new StringBundler(4 +
+			query = new StringBundler(5 +
 					(orderByComparator.getOrderByConditionFields().length * 3) +
 					(orderByComparator.getOrderByFields().length * 3));
 		}
 		else {
-			query = new StringBundler(3);
+			query = new StringBundler(4);
 		}
 
 		query.append(_SQL_SELECT_ENTRY_WHERE);
 
-		boolean bindName = false;
+		query.append(_FINDER_COLUMN_G_G_GROUPID_2);
 
-		if (name == null) {
-			query.append(_FINDER_COLUMN_NAMEFINDER_NAME_1);
-		}
-		else if (name.equals("")) {
-			query.append(_FINDER_COLUMN_NAMEFINDER_NAME_3);
-		}
-		else {
-			bindName = true;
-
-			query.append(_FINDER_COLUMN_NAMEFINDER_NAME_2);
-		}
+		query.append(_FINDER_COLUMN_G_G_GUESTBOOKID_2);
 
 		if (orderByComparator != null) {
 			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
@@ -1314,9 +1319,9 @@ public class EntryPersistenceImpl extends BasePersistenceImpl<Entry>
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
-		if (bindName) {
-			qPos.add(name);
-		}
+		qPos.add(groupId);
+
+		qPos.add(guestbookId);
 
 		if (orderByComparator != null) {
 			Object[] values = orderByComparator.getOrderByConditionValues(entry);
@@ -1337,50 +1342,42 @@ public class EntryPersistenceImpl extends BasePersistenceImpl<Entry>
 	}
 
 	/**
-	 * Removes all the entries where name = &#63; from the database.
+	 * Removes all the entries where groupId = &#63; and guestbookId = &#63; from the database.
 	 *
-	 * @param name the name
+	 * @param groupId the group ID
+	 * @param guestbookId the guestbook ID
 	 */
 	@Override
-	public void removeBynameFinder(String name) {
-		for (Entry entry : findBynameFinder(name, QueryUtil.ALL_POS,
+	public void removeByG_G(long groupId, long guestbookId) {
+		for (Entry entry : findByG_G(groupId, guestbookId, QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS, null)) {
 			remove(entry);
 		}
 	}
 
 	/**
-	 * Returns the number of entries where name = &#63;.
+	 * Returns the number of entries where groupId = &#63; and guestbookId = &#63;.
 	 *
-	 * @param name the name
+	 * @param groupId the group ID
+	 * @param guestbookId the guestbook ID
 	 * @return the number of matching entries
 	 */
 	@Override
-	public int countBynameFinder(String name) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_NAMEFINDER;
+	public int countByG_G(long groupId, long guestbookId) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_G;
 
-		Object[] finderArgs = new Object[] { name };
+		Object[] finderArgs = new Object[] { groupId, guestbookId };
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
 		if (count == null) {
-			StringBundler query = new StringBundler(2);
+			StringBundler query = new StringBundler(3);
 
 			query.append(_SQL_COUNT_ENTRY_WHERE);
 
-			boolean bindName = false;
+			query.append(_FINDER_COLUMN_G_G_GROUPID_2);
 
-			if (name == null) {
-				query.append(_FINDER_COLUMN_NAMEFINDER_NAME_1);
-			}
-			else if (name.equals("")) {
-				query.append(_FINDER_COLUMN_NAMEFINDER_NAME_3);
-			}
-			else {
-				bindName = true;
-
-				query.append(_FINDER_COLUMN_NAMEFINDER_NAME_2);
-			}
+			query.append(_FINDER_COLUMN_G_G_GUESTBOOKID_2);
 
 			String sql = query.toString();
 
@@ -1393,9 +1390,9 @@ public class EntryPersistenceImpl extends BasePersistenceImpl<Entry>
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				if (bindName) {
-					qPos.add(name);
-				}
+				qPos.add(groupId);
+
+				qPos.add(guestbookId);
 
 				count = (Long)q.uniqueResult();
 
@@ -1414,9 +1411,8 @@ public class EntryPersistenceImpl extends BasePersistenceImpl<Entry>
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_NAMEFINDER_NAME_1 = "entry.name IS NULL";
-	private static final String _FINDER_COLUMN_NAMEFINDER_NAME_2 = "entry.name = ?";
-	private static final String _FINDER_COLUMN_NAMEFINDER_NAME_3 = "(entry.name IS NULL OR entry.name = '')";
+	private static final String _FINDER_COLUMN_G_G_GROUPID_2 = "entry.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_G_GUESTBOOKID_2 = "entry.guestbookId = ?";
 
 	public EntryPersistenceImpl() {
 		setModelClass(Entry.class);
@@ -1717,10 +1713,12 @@ public class EntryPersistenceImpl extends BasePersistenceImpl<Entry>
 			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_UUID,
 				args);
 
-			args = new Object[] { entryModelImpl.getName() };
+			args = new Object[] {
+					entryModelImpl.getGroupId(), entryModelImpl.getGuestbookId()
+				};
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_NAMEFINDER, args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_NAMEFINDER,
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_G_G, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_G,
 				args);
 
 			finderCache.removeResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY);
@@ -1745,17 +1743,23 @@ public class EntryPersistenceImpl extends BasePersistenceImpl<Entry>
 			}
 
 			if ((entryModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_NAMEFINDER.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] { entryModelImpl.getOriginalName() };
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_G.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						entryModelImpl.getOriginalGroupId(),
+						entryModelImpl.getOriginalGuestbookId()
+					};
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_NAMEFINDER, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_NAMEFINDER,
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_G_G, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_G,
 					args);
 
-				args = new Object[] { entryModelImpl.getName() };
+				args = new Object[] {
+						entryModelImpl.getGroupId(),
+						entryModelImpl.getGuestbookId()
+					};
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_NAMEFINDER, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_NAMEFINDER,
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_G_G, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_G,
 					args);
 			}
 		}

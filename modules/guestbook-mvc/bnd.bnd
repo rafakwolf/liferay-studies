@@ -1,0 +1,4 @@
+Bundle-Name: guestbook-mvc
+Bundle-SymbolicName: guestbook.mvc
+Bundle-Version: 1.0.0
+Export-Package: guestbook.mvc.constants

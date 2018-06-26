@@ -881,82 +881,81 @@ public class GuestbookPersistenceImpl extends BasePersistenceImpl<Guestbook>
 	private static final String _FINDER_COLUMN_UUID_G_UUID_2 = "guestbook.uuid = ? AND ";
 	private static final String _FINDER_COLUMN_UUID_G_UUID_3 = "(guestbook.uuid IS NULL OR guestbook.uuid = '') AND ";
 	private static final String _FINDER_COLUMN_UUID_G_GROUPID_2 = "guestbook.groupId = ?";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_NAMESEARCH =
-		new FinderPath(GuestbookModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_GROUPID = new FinderPath(GuestbookModelImpl.ENTITY_CACHE_ENABLED,
 			GuestbookModelImpl.FINDER_CACHE_ENABLED, GuestbookImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByNameSearch",
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByGroupId",
 			new String[] {
-				String.class.getName(),
+				Long.class.getName(),
 				
 			Integer.class.getName(), Integer.class.getName(),
 				OrderByComparator.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_NAMESEARCH =
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID =
 		new FinderPath(GuestbookModelImpl.ENTITY_CACHE_ENABLED,
 			GuestbookModelImpl.FINDER_CACHE_ENABLED, GuestbookImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByNameSearch",
-			new String[] { String.class.getName() },
-			GuestbookModelImpl.NAME_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_NAMESEARCH = new FinderPath(GuestbookModelImpl.ENTITY_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByGroupId",
+			new String[] { Long.class.getName() },
+			GuestbookModelImpl.GROUPID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_GROUPID = new FinderPath(GuestbookModelImpl.ENTITY_CACHE_ENABLED,
 			GuestbookModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByNameSearch",
-			new String[] { String.class.getName() });
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByGroupId",
+			new String[] { Long.class.getName() });
 
 	/**
-	 * Returns all the guestbooks where name = &#63;.
+	 * Returns all the guestbooks where groupId = &#63;.
 	 *
-	 * @param name the name
+	 * @param groupId the group ID
 	 * @return the matching guestbooks
 	 */
 	@Override
-	public List<Guestbook> findByNameSearch(String name) {
-		return findByNameSearch(name, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	public List<Guestbook> findByGroupId(long groupId) {
+		return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the guestbooks where name = &#63;.
+	 * Returns a range of all the guestbooks where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link GuestbookModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param name the name
+	 * @param groupId the group ID
 	 * @param start the lower bound of the range of guestbooks
 	 * @param end the upper bound of the range of guestbooks (not inclusive)
 	 * @return the range of matching guestbooks
 	 */
 	@Override
-	public List<Guestbook> findByNameSearch(String name, int start, int end) {
-		return findByNameSearch(name, start, end, null);
+	public List<Guestbook> findByGroupId(long groupId, int start, int end) {
+		return findByGroupId(groupId, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the guestbooks where name = &#63;.
+	 * Returns an ordered range of all the guestbooks where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link GuestbookModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param name the name
+	 * @param groupId the group ID
 	 * @param start the lower bound of the range of guestbooks
 	 * @param end the upper bound of the range of guestbooks (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching guestbooks
 	 */
 	@Override
-	public List<Guestbook> findByNameSearch(String name, int start, int end,
+	public List<Guestbook> findByGroupId(long groupId, int start, int end,
 		OrderByComparator<Guestbook> orderByComparator) {
-		return findByNameSearch(name, start, end, orderByComparator, true);
+		return findByGroupId(groupId, start, end, orderByComparator, true);
 	}
 
 	/**
-	 * Returns an ordered range of all the guestbooks where name = &#63;.
+	 * Returns an ordered range of all the guestbooks where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link GuestbookModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param name the name
+	 * @param groupId the group ID
 	 * @param start the lower bound of the range of guestbooks
 	 * @param end the upper bound of the range of guestbooks (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
@@ -964,7 +963,7 @@ public class GuestbookPersistenceImpl extends BasePersistenceImpl<Guestbook>
 	 * @return the ordered range of matching guestbooks
 	 */
 	@Override
-	public List<Guestbook> findByNameSearch(String name, int start, int end,
+	public List<Guestbook> findByGroupId(long groupId, int start, int end,
 		OrderByComparator<Guestbook> orderByComparator,
 		boolean retrieveFromCache) {
 		boolean pagination = true;
@@ -974,12 +973,12 @@ public class GuestbookPersistenceImpl extends BasePersistenceImpl<Guestbook>
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 				(orderByComparator == null)) {
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_NAMESEARCH;
-			finderArgs = new Object[] { name };
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID;
+			finderArgs = new Object[] { groupId };
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_NAMESEARCH;
-			finderArgs = new Object[] { name, start, end, orderByComparator };
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_GROUPID;
+			finderArgs = new Object[] { groupId, start, end, orderByComparator };
 		}
 
 		List<Guestbook> list = null;
@@ -990,7 +989,7 @@ public class GuestbookPersistenceImpl extends BasePersistenceImpl<Guestbook>
 
 			if ((list != null) && !list.isEmpty()) {
 				for (Guestbook guestbook : list) {
-					if (!Objects.equals(name, guestbook.getName())) {
+					if ((groupId != guestbook.getGroupId())) {
 						list = null;
 
 						break;
@@ -1012,19 +1011,7 @@ public class GuestbookPersistenceImpl extends BasePersistenceImpl<Guestbook>
 
 			query.append(_SQL_SELECT_GUESTBOOK_WHERE);
 
-			boolean bindName = false;
-
-			if (name == null) {
-				query.append(_FINDER_COLUMN_NAMESEARCH_NAME_1);
-			}
-			else if (name.equals("")) {
-				query.append(_FINDER_COLUMN_NAMESEARCH_NAME_3);
-			}
-			else {
-				bindName = true;
-
-				query.append(_FINDER_COLUMN_NAMESEARCH_NAME_2);
-			}
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -1046,9 +1033,7 @@ public class GuestbookPersistenceImpl extends BasePersistenceImpl<Guestbook>
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				if (bindName) {
-					qPos.add(name);
-				}
+				qPos.add(groupId);
 
 				if (!pagination) {
 					list = (List<Guestbook>)QueryUtil.list(q, getDialect(),
@@ -1081,18 +1066,18 @@ public class GuestbookPersistenceImpl extends BasePersistenceImpl<Guestbook>
 	}
 
 	/**
-	 * Returns the first guestbook in the ordered set where name = &#63;.
+	 * Returns the first guestbook in the ordered set where groupId = &#63;.
 	 *
-	 * @param name the name
+	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching guestbook
 	 * @throws NoSuchGuestbookException if a matching guestbook could not be found
 	 */
 	@Override
-	public Guestbook findByNameSearch_First(String name,
+	public Guestbook findByGroupId_First(long groupId,
 		OrderByComparator<Guestbook> orderByComparator)
 		throws NoSuchGuestbookException {
-		Guestbook guestbook = fetchByNameSearch_First(name, orderByComparator);
+		Guestbook guestbook = fetchByGroupId_First(groupId, orderByComparator);
 
 		if (guestbook != null) {
 			return guestbook;
@@ -1102,8 +1087,8 @@ public class GuestbookPersistenceImpl extends BasePersistenceImpl<Guestbook>
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("name=");
-		msg.append(name);
+		msg.append("groupId=");
+		msg.append(groupId);
 
 		msg.append("}");
 
@@ -1111,16 +1096,16 @@ public class GuestbookPersistenceImpl extends BasePersistenceImpl<Guestbook>
 	}
 
 	/**
-	 * Returns the first guestbook in the ordered set where name = &#63;.
+	 * Returns the first guestbook in the ordered set where groupId = &#63;.
 	 *
-	 * @param name the name
+	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching guestbook, or <code>null</code> if a matching guestbook could not be found
 	 */
 	@Override
-	public Guestbook fetchByNameSearch_First(String name,
+	public Guestbook fetchByGroupId_First(long groupId,
 		OrderByComparator<Guestbook> orderByComparator) {
-		List<Guestbook> list = findByNameSearch(name, 0, 1, orderByComparator);
+		List<Guestbook> list = findByGroupId(groupId, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -1130,18 +1115,18 @@ public class GuestbookPersistenceImpl extends BasePersistenceImpl<Guestbook>
 	}
 
 	/**
-	 * Returns the last guestbook in the ordered set where name = &#63;.
+	 * Returns the last guestbook in the ordered set where groupId = &#63;.
 	 *
-	 * @param name the name
+	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching guestbook
 	 * @throws NoSuchGuestbookException if a matching guestbook could not be found
 	 */
 	@Override
-	public Guestbook findByNameSearch_Last(String name,
+	public Guestbook findByGroupId_Last(long groupId,
 		OrderByComparator<Guestbook> orderByComparator)
 		throws NoSuchGuestbookException {
-		Guestbook guestbook = fetchByNameSearch_Last(name, orderByComparator);
+		Guestbook guestbook = fetchByGroupId_Last(groupId, orderByComparator);
 
 		if (guestbook != null) {
 			return guestbook;
@@ -1151,8 +1136,8 @@ public class GuestbookPersistenceImpl extends BasePersistenceImpl<Guestbook>
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("name=");
-		msg.append(name);
+		msg.append("groupId=");
+		msg.append(groupId);
 
 		msg.append("}");
 
@@ -1160,22 +1145,22 @@ public class GuestbookPersistenceImpl extends BasePersistenceImpl<Guestbook>
 	}
 
 	/**
-	 * Returns the last guestbook in the ordered set where name = &#63;.
+	 * Returns the last guestbook in the ordered set where groupId = &#63;.
 	 *
-	 * @param name the name
+	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching guestbook, or <code>null</code> if a matching guestbook could not be found
 	 */
 	@Override
-	public Guestbook fetchByNameSearch_Last(String name,
+	public Guestbook fetchByGroupId_Last(long groupId,
 		OrderByComparator<Guestbook> orderByComparator) {
-		int count = countByNameSearch(name);
+		int count = countByGroupId(groupId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<Guestbook> list = findByNameSearch(name, count - 1, count,
+		List<Guestbook> list = findByGroupId(groupId, count - 1, count,
 				orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -1186,17 +1171,17 @@ public class GuestbookPersistenceImpl extends BasePersistenceImpl<Guestbook>
 	}
 
 	/**
-	 * Returns the guestbooks before and after the current guestbook in the ordered set where name = &#63;.
+	 * Returns the guestbooks before and after the current guestbook in the ordered set where groupId = &#63;.
 	 *
 	 * @param guestbookId the primary key of the current guestbook
-	 * @param name the name
+	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next guestbook
 	 * @throws NoSuchGuestbookException if a guestbook with the primary key could not be found
 	 */
 	@Override
-	public Guestbook[] findByNameSearch_PrevAndNext(long guestbookId,
-		String name, OrderByComparator<Guestbook> orderByComparator)
+	public Guestbook[] findByGroupId_PrevAndNext(long guestbookId,
+		long groupId, OrderByComparator<Guestbook> orderByComparator)
 		throws NoSuchGuestbookException {
 		Guestbook guestbook = findByPrimaryKey(guestbookId);
 
@@ -1207,12 +1192,12 @@ public class GuestbookPersistenceImpl extends BasePersistenceImpl<Guestbook>
 
 			Guestbook[] array = new GuestbookImpl[3];
 
-			array[0] = getByNameSearch_PrevAndNext(session, guestbook, name,
+			array[0] = getByGroupId_PrevAndNext(session, guestbook, groupId,
 					orderByComparator, true);
 
 			array[1] = guestbook;
 
-			array[2] = getByNameSearch_PrevAndNext(session, guestbook, name,
+			array[2] = getByGroupId_PrevAndNext(session, guestbook, groupId,
 					orderByComparator, false);
 
 			return array;
@@ -1225,8 +1210,8 @@ public class GuestbookPersistenceImpl extends BasePersistenceImpl<Guestbook>
 		}
 	}
 
-	protected Guestbook getByNameSearch_PrevAndNext(Session session,
-		Guestbook guestbook, String name,
+	protected Guestbook getByGroupId_PrevAndNext(Session session,
+		Guestbook guestbook, long groupId,
 		OrderByComparator<Guestbook> orderByComparator, boolean previous) {
 		StringBundler query = null;
 
@@ -1241,19 +1226,7 @@ public class GuestbookPersistenceImpl extends BasePersistenceImpl<Guestbook>
 
 		query.append(_SQL_SELECT_GUESTBOOK_WHERE);
 
-		boolean bindName = false;
-
-		if (name == null) {
-			query.append(_FINDER_COLUMN_NAMESEARCH_NAME_1);
-		}
-		else if (name.equals("")) {
-			query.append(_FINDER_COLUMN_NAMESEARCH_NAME_3);
-		}
-		else {
-			bindName = true;
-
-			query.append(_FINDER_COLUMN_NAMESEARCH_NAME_2);
-		}
+		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 		if (orderByComparator != null) {
 			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
@@ -1323,9 +1296,7 @@ public class GuestbookPersistenceImpl extends BasePersistenceImpl<Guestbook>
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
-		if (bindName) {
-			qPos.add(name);
-		}
+		qPos.add(groupId);
 
 		if (orderByComparator != null) {
 			Object[] values = orderByComparator.getOrderByConditionValues(guestbook);
@@ -1346,29 +1317,29 @@ public class GuestbookPersistenceImpl extends BasePersistenceImpl<Guestbook>
 	}
 
 	/**
-	 * Removes all the guestbooks where name = &#63; from the database.
+	 * Removes all the guestbooks where groupId = &#63; from the database.
 	 *
-	 * @param name the name
+	 * @param groupId the group ID
 	 */
 	@Override
-	public void removeByNameSearch(String name) {
-		for (Guestbook guestbook : findByNameSearch(name, QueryUtil.ALL_POS,
+	public void removeByGroupId(long groupId) {
+		for (Guestbook guestbook : findByGroupId(groupId, QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS, null)) {
 			remove(guestbook);
 		}
 	}
 
 	/**
-	 * Returns the number of guestbooks where name = &#63;.
+	 * Returns the number of guestbooks where groupId = &#63;.
 	 *
-	 * @param name the name
+	 * @param groupId the group ID
 	 * @return the number of matching guestbooks
 	 */
 	@Override
-	public int countByNameSearch(String name) {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_NAMESEARCH;
+	public int countByGroupId(long groupId) {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_GROUPID;
 
-		Object[] finderArgs = new Object[] { name };
+		Object[] finderArgs = new Object[] { groupId };
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -1377,19 +1348,7 @@ public class GuestbookPersistenceImpl extends BasePersistenceImpl<Guestbook>
 
 			query.append(_SQL_COUNT_GUESTBOOK_WHERE);
 
-			boolean bindName = false;
-
-			if (name == null) {
-				query.append(_FINDER_COLUMN_NAMESEARCH_NAME_1);
-			}
-			else if (name.equals("")) {
-				query.append(_FINDER_COLUMN_NAMESEARCH_NAME_3);
-			}
-			else {
-				bindName = true;
-
-				query.append(_FINDER_COLUMN_NAMESEARCH_NAME_2);
-			}
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 			String sql = query.toString();
 
@@ -1402,9 +1361,7 @@ public class GuestbookPersistenceImpl extends BasePersistenceImpl<Guestbook>
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				if (bindName) {
-					qPos.add(name);
-				}
+				qPos.add(groupId);
 
 				count = (Long)q.uniqueResult();
 
@@ -1423,9 +1380,7 @@ public class GuestbookPersistenceImpl extends BasePersistenceImpl<Guestbook>
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_NAMESEARCH_NAME_1 = "guestbook.name IS NULL";
-	private static final String _FINDER_COLUMN_NAMESEARCH_NAME_2 = "guestbook.name = ?";
-	private static final String _FINDER_COLUMN_NAMESEARCH_NAME_3 = "(guestbook.name IS NULL OR guestbook.name = '')";
+	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "guestbook.groupId = ?";
 
 	public GuestbookPersistenceImpl() {
 		setModelClass(Guestbook.class);
@@ -1731,10 +1686,10 @@ public class GuestbookPersistenceImpl extends BasePersistenceImpl<Guestbook>
 			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_UUID,
 				args);
 
-			args = new Object[] { guestbookModelImpl.getName() };
+			args = new Object[] { guestbookModelImpl.getGroupId() };
 
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_NAMESEARCH, args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_NAMESEARCH,
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
 				args);
 
 			finderCache.removeResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY);
@@ -1761,19 +1716,19 @@ public class GuestbookPersistenceImpl extends BasePersistenceImpl<Guestbook>
 			}
 
 			if ((guestbookModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_NAMESEARCH.getColumnBitmask()) != 0) {
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
-						guestbookModelImpl.getOriginalName()
+						guestbookModelImpl.getOriginalGroupId()
 					};
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_NAMESEARCH, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_NAMESEARCH,
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
 					args);
 
-				args = new Object[] { guestbookModelImpl.getName() };
+				args = new Object[] { guestbookModelImpl.getGroupId() };
 
-				finderCache.removeResult(FINDER_PATH_COUNT_BY_NAMESEARCH, args);
-				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_NAMESEARCH,
+				finderCache.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
+				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
 					args);
 			}
 		}

@@ -54,6 +54,13 @@ public class GuestbookLocalServiceUtil {
 		return getService().addGuestbook(guestbook);
 	}
 
+	public static guestbook.model.Guestbook addGuestbook(long userId,
+		String name,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService().addGuestbook(userId, name, serviceContext);
+	}
+
 	/**
 	* Creates a new guestbook with the primary key. Does not add the guestbook to the database.
 	*
@@ -85,6 +92,13 @@ public class GuestbookLocalServiceUtil {
 	public static guestbook.model.Guestbook deleteGuestbook(long guestbookId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		return getService().deleteGuestbook(guestbookId);
+	}
+
+	public static guestbook.model.Guestbook deleteGuestbook(long guestbookId,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().deleteGuestbook(guestbookId, serviceContext);
 	}
 
 	/**
@@ -236,6 +250,22 @@ public class GuestbookLocalServiceUtil {
 		return getService().getGuestbooks(start, end);
 	}
 
+	public static java.util.List<guestbook.model.Guestbook> getGuestbooks(
+		long groupId) {
+		return getService().getGuestbooks(groupId);
+	}
+
+	public static java.util.List<guestbook.model.Guestbook> getGuestbooks(
+		long groupId, int start, int end) {
+		return getService().getGuestbooks(groupId, start, end);
+	}
+
+	public static java.util.List<guestbook.model.Guestbook> getGuestbooks(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<guestbook.model.Guestbook> obc) {
+		return getService().getGuestbooks(groupId, start, end, obc);
+	}
+
 	/**
 	* Returns the number of guestbooks.
 	*
@@ -243,6 +273,10 @@ public class GuestbookLocalServiceUtil {
 	*/
 	public static int getGuestbooksCount() {
 		return getService().getGuestbooksCount();
+	}
+
+	public static int getGuestbooksCount(long groupId) {
+		return getService().getGuestbooksCount(groupId);
 	}
 
 	public static com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery getIndexableActionableDynamicQuery() {
@@ -273,6 +307,15 @@ public class GuestbookLocalServiceUtil {
 	public static guestbook.model.Guestbook updateGuestbook(
 		guestbook.model.Guestbook guestbook) {
 		return getService().updateGuestbook(guestbook);
+	}
+
+	public static guestbook.model.Guestbook updateGuestbook(long userId,
+		long guestbookId, String name,
+		com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .updateGuestbook(userId, guestbookId, name, serviceContext);
 	}
 
 	public static GuestbookLocalService getService() {

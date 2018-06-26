@@ -14,7 +14,21 @@
 
 package guestbook.service.impl;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.Validator;
+import guestbook.exception.GuestbookNameException;
+import guestbook.model.Entry;
+import guestbook.model.Guestbook;
 import guestbook.service.base.GuestbookLocalServiceBaseImpl;
+
+import java.util.Date;
+import java.util.List;
+
+import static com.liferay.portal.kernel.format.PhoneNumberFormatUtil.validate;
 
 /**
  * The implementation of the guestbook local service.
@@ -36,4 +50,94 @@ public class GuestbookLocalServiceImpl extends GuestbookLocalServiceBaseImpl {
 	 *
 	 * Never reference this class directly. Always use {@link guestbook.service.GuestbookLocalServiceUtil} to access the guestbook local service.
 	 */
+
+	public Guestbook addGuestbook(
+			long userId, String name, ServiceContext serviceContext)
+			throws PortalException {
+
+		long groupId = serviceContext.getScopeGroupId();
+
+		this.validate(name);
+
+		long guestbookId = counterLocalService.increment();
+
+		Guestbook guestbook = guestbookPersistence.create(guestbookId);
+
+		guestbook.setUuid(serviceContext.getUuid());
+		guestbook.setGroupId(groupId);
+		guestbook.setName(name);
+		guestbook.setExpandoBridgeAttributes(serviceContext);
+
+		guestbookPersistence.update(guestbook);
+
+		return guestbook;
+	}
+
+	public Guestbook updateGuestbook(long userId, long guestbookId,
+									 String name, ServiceContext serviceContext) throws PortalException,
+			SystemException {
+
+//		Date now = new Date();
+
+		this.validate(name);
+
+		Guestbook guestbook = getGuestbook(guestbookId);
+
+//		User user = userLocalService.getUser(userId);
+
+//		guestbook.setUserId(userId);
+//		guestbook.setUserName(user.getFullName());
+//		guestbook.setModifiedDate(serviceContext.getModifiedDate(now));
+		guestbook.setName(name);
+		guestbook.setExpandoBridgeAttributes(serviceContext);
+
+		guestbookPersistence.update(guestbook);
+
+		return guestbook;
+	}
+
+	public Guestbook deleteGuestbook(long guestbookId,
+									 ServiceContext serviceContext) throws PortalException,
+			SystemException {
+
+		Guestbook guestbook = getGuestbook(guestbookId);
+
+		List<Entry> entries = entryLocalService.getEntries(
+				serviceContext.getScopeGroupId(), guestbookId);
+
+		for (Entry entry : entries) {
+			entryLocalService.deleteEntry(entry.getEntryId());
+		}
+
+		guestbook = deleteGuestbook(guestbook);
+
+		return guestbook;
+	}
+
+	public List<Guestbook> getGuestbooks(long groupId) {
+
+		return guestbookPersistence.findByGroupId(groupId);
+	}
+
+	public List<Guestbook> getGuestbooks(long groupId, int start, int end,
+										 OrderByComparator<Guestbook> obc) {
+
+		return guestbookPersistence.findByGroupId(groupId, start, end, obc);
+	}
+
+	public List<Guestbook> getGuestbooks(long groupId, int start, int end) {
+
+		return guestbookPersistence.findByGroupId(groupId, start, end);
+	}
+
+	public int getGuestbooksCount(long groupId) {
+
+		return guestbookPersistence.countByGroupId(groupId);
+	}
+
+	protected void validate(String name) throws PortalException {
+		if (Validator.isNull(name)) {
+			throw new GuestbookNameException();
+		}
+	}
 }

@@ -14,7 +14,20 @@
 
 package guestbook.service.impl;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.Validator;
+import guestbook.exception.EntryEmailException;
+import guestbook.exception.EntryMessageException;
+import guestbook.exception.EntryNameException;
+import guestbook.model.Entry;
 import guestbook.service.base.EntryLocalServiceBaseImpl;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  * The implementation of the entry local service.
@@ -35,5 +48,107 @@ public class EntryLocalServiceImpl extends EntryLocalServiceBaseImpl {
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never reference this class directly. Always use {@link guestbook.service.EntryLocalServiceUtil} to access the entry local service.
+	 *
 	 */
+
+	public Entry addEntry(
+			long userId, long guestbookId, String name, String email,
+			String message, ServiceContext serviceContext)
+			throws PortalException {
+
+		long groupId = serviceContext.getScopeGroupId();
+
+		User user = userLocalService.getUserById(userId);
+
+		validate(name, email, message);
+
+		long entryId = counterLocalService.increment();
+
+		Entry entry = entryPersistence.create(entryId);
+
+		entry.setUuid(serviceContext.getUuid());
+		entry.setUserId(userId);
+		entry.setGroupId(groupId);
+		entry.setUserName(user.getFullName());
+		entry.setExpandoBridgeAttributes(serviceContext);
+		entry.setGuestbookId(guestbookId);
+		entry.setName(name);
+		entry.setEmail(email);
+		entry.setMessage(message);
+
+		entryPersistence.update(entry);
+
+		return entry;
+	}
+
+	public Entry updateEntry (
+			long userId, long guestbookId, long entryId, String name, String email,
+			String message, ServiceContext serviceContext)
+			throws PortalException, SystemException {
+
+		Date now = new Date();
+
+		validate(name, email, message);
+
+		Entry entry = getEntry(entryId);
+
+		User user = userLocalService.getUserById(userId);
+
+		entry.setUserId(userId);
+		entry.setUserName(user.getFullName());
+		entry.setName(name);
+		entry.setEmail(email);
+		entry.setMessage(message);
+		entry.setExpandoBridgeAttributes(serviceContext);
+
+		entryPersistence.update(entry);
+
+		return entry;
+	}
+
+	public Entry deleteEntry (long entryId, ServiceContext serviceContext)
+			throws PortalException {
+
+		Entry entry = getEntry(entryId);
+
+		entry = deleteEntry(entryId);
+
+		return entry;
+	}
+
+	public List<Entry> getEntries(long groupId, long guestbookId) {
+		return entryPersistence.findByG_G(groupId, guestbookId);
+	}
+
+	public List<Entry> getEntries(long groupId, long guestbookId, int start, int end)
+			throws SystemException {
+
+		return entryPersistence.findByG_G(groupId, guestbookId, start, end);
+	}
+
+	public List<Entry> getEntries(
+			long groupId, long guestbookId, int start, int end, OrderByComparator<Entry> obc) {
+
+		return entryPersistence.findByG_G(groupId, guestbookId, start, end, obc);
+	}
+
+	public int getEntriesCount(long groupId, long guestbookId) {
+		return entryPersistence.countByG_G(groupId, guestbookId);
+	}
+
+	protected void validate(String name, String email, String entry)
+			throws PortalException {
+
+		if (Validator.isNull(name)) {
+			throw new EntryNameException();
+		}
+
+		if (!Validator.isEmailAddress(email)) {
+			throw new EntryEmailException();
+		}
+
+		if (Validator.isNull(entry)) {
+			throw new EntryMessageException();
+		}
+	}
 }

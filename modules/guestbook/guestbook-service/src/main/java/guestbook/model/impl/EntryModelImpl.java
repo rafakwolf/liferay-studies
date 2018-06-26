@@ -107,7 +107,7 @@ public class EntryModelImpl extends BaseModelImpl<Entry> implements EntryModel {
 				"value.object.column.bitmask.enabled.guestbook.model.Entry"),
 			true);
 	public static final long GROUPID_COLUMN_BITMASK = 1L;
-	public static final long NAME_COLUMN_BITMASK = 2L;
+	public static final long GUESTBOOKID_COLUMN_BITMASK = 2L;
 	public static final long UUID_COLUMN_BITMASK = 4L;
 	public static final long ENTRYID_COLUMN_BITMASK = 8L;
 
@@ -341,17 +341,7 @@ public class EntryModelImpl extends BaseModelImpl<Entry> implements EntryModel {
 
 	@Override
 	public void setName(String name) {
-		_columnBitmask |= NAME_COLUMN_BITMASK;
-
-		if (_originalName == null) {
-			_originalName = _name;
-		}
-
 		_name = name;
-	}
-
-	public String getOriginalName() {
-		return GetterUtil.getString(_originalName);
 	}
 
 	@JSON
@@ -394,7 +384,19 @@ public class EntryModelImpl extends BaseModelImpl<Entry> implements EntryModel {
 
 	@Override
 	public void setGuestbookId(long guestbookId) {
+		_columnBitmask |= GUESTBOOKID_COLUMN_BITMASK;
+
+		if (!_setOriginalGuestbookId) {
+			_setOriginalGuestbookId = true;
+
+			_originalGuestbookId = _guestbookId;
+		}
+
 		_guestbookId = guestbookId;
+	}
+
+	public long getOriginalGuestbookId() {
+		return _originalGuestbookId;
 	}
 
 	@JSON
@@ -548,7 +550,9 @@ public class EntryModelImpl extends BaseModelImpl<Entry> implements EntryModel {
 
 		entryModelImpl._setOriginalGroupId = false;
 
-		entryModelImpl._originalName = entryModelImpl._name;
+		entryModelImpl._originalGuestbookId = entryModelImpl._guestbookId;
+
+		entryModelImpl._setOriginalGuestbookId = false;
 
 		entryModelImpl._columnBitmask = 0;
 	}
@@ -696,10 +700,11 @@ public class EntryModelImpl extends BaseModelImpl<Entry> implements EntryModel {
 	private long _originalGroupId;
 	private boolean _setOriginalGroupId;
 	private String _name;
-	private String _originalName;
 	private String _message;
 	private String _email;
 	private long _guestbookId;
+	private long _originalGuestbookId;
+	private boolean _setOriginalGuestbookId;
 	private long _userId;
 	private String _userName;
 	private long _columnBitmask;

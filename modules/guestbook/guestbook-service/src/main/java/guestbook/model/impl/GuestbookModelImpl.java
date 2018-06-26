@@ -97,9 +97,8 @@ public class GuestbookModelImpl extends BaseModelImpl<Guestbook>
 				"value.object.column.bitmask.enabled.guestbook.model.Guestbook"),
 			true);
 	public static final long GROUPID_COLUMN_BITMASK = 1L;
-	public static final long NAME_COLUMN_BITMASK = 2L;
-	public static final long UUID_COLUMN_BITMASK = 4L;
-	public static final long GUESTBOOKID_COLUMN_BITMASK = 8L;
+	public static final long UUID_COLUMN_BITMASK = 2L;
+	public static final long GUESTBOOKID_COLUMN_BITMASK = 4L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -291,17 +290,7 @@ public class GuestbookModelImpl extends BaseModelImpl<Guestbook>
 
 	@Override
 	public void setName(String name) {
-		_columnBitmask |= NAME_COLUMN_BITMASK;
-
-		if (_originalName == null) {
-			_originalName = _name;
-		}
-
 		_name = name;
-	}
-
-	public String getOriginalName() {
-		return GetterUtil.getString(_originalName);
 	}
 
 	public long getColumnBitmask() {
@@ -407,8 +396,6 @@ public class GuestbookModelImpl extends BaseModelImpl<Guestbook>
 
 		guestbookModelImpl._setOriginalGroupId = false;
 
-		guestbookModelImpl._originalName = guestbookModelImpl._name;
-
 		guestbookModelImpl._columnBitmask = 0;
 	}
 
@@ -497,7 +484,6 @@ public class GuestbookModelImpl extends BaseModelImpl<Guestbook>
 	private long _originalGroupId;
 	private boolean _setOriginalGroupId;
 	private String _name;
-	private String _originalName;
 	private long _columnBitmask;
 	private Guestbook _escapedModel;
 }

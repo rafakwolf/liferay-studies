@@ -61,4 +61,10 @@ public class MyRestApiApplication extends Application {
         return entity;
     }
 
+    @GET
+    @Path("/test")
+    public String test() {
+        return "testando método rest api!!!";
+    }
+
 }

@@ -20,8 +20,9 @@
         <column name="userId" type="long" />
         <column name="userName" type="String" />
 
-        <finder name="nameFinder" return-type="Collection">
-            <finder-column name="name"/>
+        <finder name="G_G" return-type="Collection">
+            <finder-column name="groupId" />
+            <finder-column name="guestbookId" />
         </finder>
 
     </entity>
@@ -34,8 +35,8 @@
 
         <column name="name" type="String"/>
 
-        <finder name="NameSearch" return-type="Collection">
-            <finder-column name="name"/>
+        <finder name="GroupId" return-type="Collection">
+            <finder-column name="groupId" />
         </finder>
 
     </entity>
