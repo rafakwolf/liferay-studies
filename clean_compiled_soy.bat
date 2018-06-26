@@ -1,1 +1,0 @@
-del /s *.soy.js
