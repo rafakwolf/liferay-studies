@@ -11,7 +11,7 @@
 
         <column name="groupId" type="long"/>
 
-        <column name="name" type="String"/>
+        <column name="name" type="String" />
         <column name="message" type="String"/>
         <column name="email" type="String"/>
 
@@ -30,9 +30,7 @@
     <entity name="Guestbook" local-service="true" remote-service="true" uuid="true">
 
         <column name="guestbookId" primary="true" type="long"/>
-
         <column name="groupId" type="long"/>
-
         <column name="name" type="String"/>
 
         <finder name="GroupId" return-type="Collection">
