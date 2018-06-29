@@ -6,14 +6,29 @@
 {template .render}
     {@param id: string}
     {@param guestbooks: list<[
-    guestbookId: number,
-    name: string
+        guestbookId: number,
+        name: string
     ]>}
     {@param editUrl: any}
     {@param newUrl: string}
     {@param portletNamespace: string}
+    {@param Device_Brand: string}
+    {@param Device_Model: string}
+    {@param Device_Physical_Size: string}
+    {@param Device_Resolution: string}
+    {@param Device_OS: string}
+    {@param Device_OS_Version: string}
 
     <div id="{$id}">
+
+        <div class="well well-sm">
+            <p>Device Brand: {$Device_Brand}</p>
+            <p>Device OS: {$Device_OS}</p>
+            <p>Device OS Version: {$Device_OS_Version}</p>
+            <p>Device Model: {$Device_Model}</p>
+            <p>Device Physical Size: {$Device_Physical_Size}</p>
+            <p>Device Resolution: {$Device_Resolution}</p>
+        </div>
 
         <h1>Guestbooks</h1>
 

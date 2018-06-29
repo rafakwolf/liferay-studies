@@ -1,0 +1,4 @@
+Bundle-Name: MyEditor
+Bundle-SymbolicName: MyEditor
+Bundle-Version: 1.0.0
+Export-Package: MyEditor.constants

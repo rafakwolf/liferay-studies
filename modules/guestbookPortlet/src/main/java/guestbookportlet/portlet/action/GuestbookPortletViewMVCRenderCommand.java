@@ -1,5 +1,6 @@
 package guestbookportlet.portlet.action;
 
+import com.liferay.portal.kernel.mobile.device.Device;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import com.liferay.portal.kernel.template.Template;
 import com.liferay.portal.kernel.theme.PortletDisplay;
@@ -66,6 +67,15 @@ public class GuestbookPortletViewMVCRenderCommand
         int guestbookCount = GuestbookLocalServiceUtil.getGuestbooksCount();
         List<Guestbook> guestbooks = GuestbookLocalServiceUtil.getGuestbooks(0, guestbookCount);
         template.put("guestbooks", guestbooks);
+
+        Device device = themeDisplay.getDevice();
+
+        template.put("Device_Brand", device.getBrand());
+        template.put("Device_OS", device.getOS());
+        template.put("Device_OS_Version", device.getOSVersion());
+        template.put("Device_Model", device.getModel());
+        template.put("Device_Physical_Size", device.getScreenPhysicalSize().getHeight()+" x "+device.getScreenPhysicalSize().getWidth());
+        template.put("Device_Resolution", device.getScreenResolution().getHeight()+" x "+device.getScreenResolution().getWidth());
 
         return "GuestbookView";
     }
