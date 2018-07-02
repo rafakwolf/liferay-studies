@@ -23,9 +23,9 @@
 <div class="alloy-editor-container">
     <liferay-ui:input-editor
             contents="Default Content"
-            cssClass="my-alloy-editor"
-            editorName="alloyeditor"
-            name="myAlloyEditor"
+            cssClass="my-ck-editor"
+            editorName="ckeditor"
+            name="myCkEditor"
             onInitMethod="OnDescriptionEditorInit"
             placeholder="description"
             showSource="true"/>
@@ -38,7 +38,7 @@
 <aui:script>
     function <portlet:namespace/>OnDescriptionEditorInit() {
     <c:if test="<%= !customAbstract %>">
-        document.getElementById('<portlet:namespace/>myAlloyEditor').setAttribute('contenteditable', false);
+        document.getElementById('<portlet:namespace/>myAlloyEditor').setAttribute('contenteditable', true);
     </c:if>
     }
 </aui:script>

@@ -1,6 +1,7 @@
 Bundle-Name: MySoyPortlet
 Bundle-SymbolicName: mysoyportlet
 Bundle-Version: 1.0.0
+Web-ContextPath: /MySoyPortlet
 Provide-Capability:\
 	soy;\
 		type="MySoyPortlet";\

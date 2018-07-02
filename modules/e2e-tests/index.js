@@ -7,7 +7,7 @@ test('Login test', async t => {
     await t
         .click('a.sign-in.text-default')
         .expect(Selector('.modal-title').innerText).eql('Sign In')
-        .pressKey(process.platform == 'darwin' ? 'meta+a delete' : 'ctrl+a delete')
+        .pressKey(process.platform === 'darwin' ? 'meta+a delete' : 'ctrl+a delete')
         .typeText('#_com_liferay_login_web_portlet_LoginPortlet_login','test@liferay.com')
         .typeText('#_com_liferay_login_web_portlet_LoginPortlet_password','R3m3mb3r1!')
         .click('span.lfr-btn-label')
