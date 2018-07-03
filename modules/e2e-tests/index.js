@@ -1,6 +1,6 @@
 import { Selector } from 'testcafe';
 
-fixture `Liferay test`
+fixture `Liferay Guestbook test`
     .page `http://localhost:8080/web/guest`;
 
 test('Login test', async t => {
@@ -12,8 +12,29 @@ test('Login test', async t => {
         .typeText('#_com_liferay_login_web_portlet_LoginPortlet_password','R3m3mb3r1!')
         .click('span.lfr-btn-label')
         .expect(Selector('span.user-avatar-link').count).eql(1);
+});
 
-    Selector('span.user-avatar-link').count.then((resp)=> {
-            console.log('Login avatar count : '+resp);
-    });        
+test('Add Guestbook test', async t => {
+    await t
+        .click('#addGuestbookBtn')
+        .typeText('#guestbookFieldName', 'My Testcafe guestbook name')
+        .click('#saveGuestbook')
+        .expect(Selector('.yui3-widget-bd').innerText).contains("Guestbook stored")
+        .click('#backtoview');
+});
+
+test('Edit Guestbook test', async t => {
+    await t
+        .click('#editGuestbookLink')
+        .typeText('#guestbookNameField', '---changed')
+        .click('#updateGuestbookBtn')
+        .expect(Selector('.yui3-widget-bd').innerText).contains("Guestbook updated")
+        .click('#backtoview');
+});
+
+test('Delete Guestbook test', async t => {
+    await t
+        .click('#btnDeleteGuestbook')
+        .click('#confirmDeleteBtn')
+        .expect(Selector('.alert-success').innerText).contains("Guestbook deleted");
 });
