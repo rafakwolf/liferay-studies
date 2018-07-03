@@ -28,7 +28,7 @@
             <div class="form-group">
                 <label for="guestbook" class="control-label">Guestbook</label>
 
-                <select name="guestbook" id="guestbook" class="field form-control" onchange="{$changeGuestbook}">
+                <select name="guestbookSelect" id="guestbookSelect" class="field form-control" onchange="{$changeGuestbook}">
                     {foreach $guestbook in $guestbooks}
                         <option value="{$guestbook.guestbookId}"
                                 {if $guestbook.guestbookId == $entry.guestbookId} selected="selected" {/if}>
@@ -40,19 +40,19 @@
 
             <div class="form-group">
                 <label for="name" class="control-label">Name</label>
-                <input class="field form-control" type="text" name="name" value="{$entry.name ?: ''}"
+                <input class="field form-control" type="text" name="name" id="entryName" value="{$entry.name ?: ''}"
                        onChange="{$changeName}"/>
             </div>
 
             <div class="form-group">
                 <label for="email" class="control-label">E-mail</label>
-                <input class="field form-control" type="text" name="email" value="{$entry.email ?: ''}"
+                <input class="field form-control" type="text" name="email" id="entryEmail" value="{$entry.email ?: ''}"
                        onChange="{$changeEmail}"/>
             </div>
 
             <div class="form-group">
                 <label for="message" class="control-label">Message</label>
-                <input class="field form-control" type="text" name="message" value="{$entry.message ?: ''}"
+                <input class="field form-control" type="text" name="message" id="entryMessage" value="{$entry.message ?: ''}"
                 onChange="{$changeMessage}"/>
             </div>
 
@@ -60,7 +60,7 @@
             <hr>
 
             <div>
-                <button class="btn btn-primary" style="margin-right: 5px;" data-onclick="updateEntry">Update</button>
+                <button id="updateEntryBtn" class="btn btn-primary" style="margin-right: 5px;" data-onclick="updateEntry">Update</button>
                 <a id="backtoview" class="btn btn-default" href="{$backToViewURL}">Back</a>
             </div>
 

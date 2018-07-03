@@ -16,14 +16,14 @@
         <fieldset>
             <div class="form-group">
                 <label for="name" class="control-label">Name</label>
-                <input class="field form-control" type="text" name="name" value="{$guestbook.name ?: ''}"
+                <input id="guestbookNameField" class="field form-control" type="text" name="name" value="{$guestbook.name ?: ''}"
                        onChange="{$changeName}"/>
             </div>
 
             <hr>
 
             <div>
-                <button class="btn btn-primary" style="margin-right: 5px;" data-onclick="updateGuestbook">
+                <button id="updateGuestbookBtn" class="btn btn-primary" style="margin-right: 5px;" data-onclick="updateGuestbook">
                     <i class="icon-check-circle"></i>{sp}Update</button>
                 <a id="backtoview" class="btn btn-default" href="{$backToViewURL}">
                     <i class="icon-undo"></i>{sp}Back</a>

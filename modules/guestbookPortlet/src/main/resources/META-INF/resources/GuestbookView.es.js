@@ -2,11 +2,11 @@ import Component from 'metal-component/src/Component';
 import Soy from 'metal-soy/src/Soy';
 import templates from './GuestbookView.soy';
 import {Config} from 'metal-state';
-import { requestMVCResource, showNotification } from 'commons/commons.es';
+import {requestMVCResource, showNotification} from 'commons/commons.es';
 
 class View extends Component {
 
-	deleteGuestbook(event) {
+    deleteGuestbook(event) {
 
         YUI().use(
             'aui-modal',
@@ -32,6 +32,7 @@ class View extends Component {
                             }
                         },
                         {
+                            id: 'confirmDeleteBtn',
                             label: 'Delete',
                             on: {
                                 click: () => {
@@ -39,14 +40,15 @@ class View extends Component {
 
                                     const prefixedData = Liferay.Util.ns(this.portletNamespace, {guestbookId});
 
-                                    requestMVCResource(this.siteURL+"&"+this.portletNamespace+"act=delete", prefixedData)
+                                    requestMVCResource(this.siteURL + "&" + this.portletNamespace + "act=delete", prefixedData)
                                         .then(resp => {
-                                            showNotification('Deleted', 'Guestbook deleted!', 'success', 'notifications');
-                                            Liferay.SPA.app.reloadPage();
+                                            showNotification('Deleted', 'Guestbook deleted!', 'success', 'notifications').then(resp => {
+                                                Liferay.SPA.app.reloadPage();
+                                            });
                                         }).catch(e => {
-                                        console.log(e);
-                                        alert('Ops, something is wrong :(' + e.message);
-                                    });
+                                            console.log(e);
+                                            alert('Ops, something is wrong :(' + e.message);
+                                        });
 
                                     modal.hide();
                                 }
@@ -57,7 +59,27 @@ class View extends Component {
 
             }
         );
-	}
+    }
+
+
+    searchGuestbook() {
+        var input, filter, table, tr, td, i;
+        input = document.getElementById("searchGuestbook");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("guestbookTable");
+        tr = table.getElementsByTagName("tr");
+
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.visibility = "visible";
+                } else {
+                    tr[i].style.visibility = "hidden";
+                }
+            }
+        }
+    }
 
 }
 

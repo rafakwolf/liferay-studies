@@ -35,6 +35,7 @@ class View extends Component {
                             }
                         },
                         {
+                            id: 'btnDeleteEntryConfirm',
                             label: 'Delete',
                             on: {
                                 click: () => {
@@ -44,8 +45,9 @@ class View extends Component {
 
                                     requestMVCResource(this.siteURL + "&" + this.portletNamespace + "act=delete", prefixedData)
                                         .then(resp => {
-                                            showNotification("Success", "Entry deleted!", "success", "notifications");
-                                            Liferay.SPA.app.reloadPage();
+                                            showNotification("Success", "Entry deleted!", "success", "notifications").then(resp => {
+                                                Liferay.SPA.app.reloadPage();
+                                            });
                                          }).catch(e => {
                                             console.log(e);
                                             alert('Ops, something is wrong :(' + e.message);

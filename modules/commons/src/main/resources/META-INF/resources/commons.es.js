@@ -50,22 +50,32 @@ function requestMVCResource(url, data, method = 'POST') {
     });
 }
 
-function showNotification(title, message, type, targetElementId) {
-    new Liferay.Alert(
-        {
-            closeable: true,
-            delay: {
-                hide: 1000,
-                show: 0
-            },
-            duration: 1000,
-            icon: type,
-            message: message,
-            namespace: 'notification',
-            title: title,
-            type: type
-        }
-    ).render(document.getElementById(targetElementId));
+function showNotification(title, message, type, targetElementId, timeout = 1000) {
+
+    return new Promise(
+
+        function(resolve, reject) {
+            new Liferay.Alert(
+                {
+                    closeable: true,
+                    delay: {
+                        hide: timeout,
+                        show: 0
+                    },
+                    duration: timeout,
+                    icon: type,
+                    message: message,
+                    namespace: 'notification',
+                    title: title,
+                    type: type
+                }
+            ).render(document.getElementById(targetElementId));
+
+            window.setTimeout(
+                function(){
+                    resolve(true)
+                },timeout);
+        });
 }
 
 export { requestMVCResource, showNotification }

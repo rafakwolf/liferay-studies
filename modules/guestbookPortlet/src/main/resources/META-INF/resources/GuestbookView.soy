@@ -34,12 +34,17 @@
 
         <div id="notifications"></div>
 
-        <div>
-            <a class="btn btn-default" href="{$newUrl}">
-                <i class="icon-plus"></i>{sp}New Guestbook</a>
+        <div class="row">
+            <div class="col col-sm-4">
+                <a id="addGuestbookBtn" class="btn btn-default" href="{$newUrl}">
+                    <i class="icon-plus"></i>{sp}New Guestbook</a>
+            </div>
+            <div class="col col-sm-8">
+                <input type="text" class="field form-control" id="searchGuestbook" placeholder="Search" data-onkeyup="searchGuestbook">
+            </div>
         </div>
 
-        <table class="table">
+        <table id="guestbookTable" class="table">
             <thead>
             <tr>
                 <th>Name</th>
@@ -53,7 +58,7 @@
                         {$guestbook.name}
                     </td>
                     <td class="text-right" style="width: 250px;">
-                        <a href="{$editUrl}&{$portletNamespace}guestbookId={$guestbook.guestbookId}"
+                        <a id="editGuestbookLink" href="{$editUrl}&{$portletNamespace}guestbookId={$guestbook.guestbookId}"
                            class="btn btn-default" style="margin-right: 5px;">
                             <i class="icon-pencil"></i>{sp}Edit
                         </a>
