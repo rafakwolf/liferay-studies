@@ -16,6 +16,7 @@
         <column name="email" type="String"/>
 
         <column name="guestbookId" type="long"/>
+        <column name="Guestbook" type="Collection" entity="guestbook.Guestbook" />
 
         <column name="userId" type="long" />
         <column name="userName" type="String" />
@@ -25,6 +26,7 @@
             <finder-column name="guestbookId" />
         </finder>
 
+        <reference entity="Guestbook" package-path="guestbook"/>
     </entity>
 
     <entity name="Guestbook" local-service="true" remote-service="true" uuid="true">

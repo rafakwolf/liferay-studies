@@ -77,17 +77,10 @@ public class GuestbookLocalServiceImpl extends GuestbookLocalServiceBaseImpl {
 									 String name, ServiceContext serviceContext) throws PortalException,
 			SystemException {
 
-//		Date now = new Date();
-
 		this.validate(name);
 
 		Guestbook guestbook = getGuestbook(guestbookId);
 
-//		User user = userLocalService.getUser(userId);
-
-//		guestbook.setUserId(userId);
-//		guestbook.setUserName(user.getFullName());
-//		guestbook.setModifiedDate(serviceContext.getModifiedDate(now));
 		guestbook.setName(name);
 		guestbook.setExpandoBridgeAttributes(serviceContext);
 

@@ -86,8 +86,6 @@ public class EntryLocalServiceImpl extends EntryLocalServiceBaseImpl {
 			String message, ServiceContext serviceContext)
 			throws PortalException, SystemException {
 
-		Date now = new Date();
-
 		validate(name, email, message);
 
 		Entry entry = getEntry(entryId);

@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 
+<!--suppress SpringFacetInspection -->
 <beans
 	default-destroy-method="destroy"
 	default-init-method="afterPropertiesSet"
